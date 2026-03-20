@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOOK MARKERS — 心に刻む、一節のために</title>
+    <meta name="description" content="本のページを撮影するだけで文字を読み起こし、大切な一節をいつでも呼び起こせるパーソナルブックマーク。">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#c9a84c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Book Markers">
+    <link rel="apple-touch-icon" href="icons/bookmark-icon.png">
+    <link rel="icon" type="image/png" href="icons/bookmark-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ヘッダー -->
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <div class="logo" id="logo-btn" role="button" tabindex="0" aria-label="ホームへ戻る">
+                <div class="logo-icon">
+                    <img src="icons/bookmark-icon.png" alt="Book Markers Icon" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">BOOK MARKERS</span>
+                    <span class="logo-sub">心に刻む、一節のために</span>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <button class="nav-btn active" id="nav-library" aria-label="ライブラリ">
+                    <i class="fa-solid fa-books"></i>
+                    <span>ライブラリ</span>
+                </button>
+                <button class="nav-btn" id="nav-capture" aria-label="撮影・アップロード">
+                    <i class="fa-solid fa-camera"></i>
+                    <span>追加</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main-content">
+
+        <!-- ========== ライブラリビュー ========== -->
+        <section class="view active" id="view-library">
+            <div class="library-header">
+                <div class="library-title-area">
+                    <h1 class="section-title">My Library</h1>
+                    <span class="bookmark-count" id="bookmark-count">0 passages</span>
+                </div>
+                <div class="library-controls">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="search-input" placeholder="本のタイトル・著者・本文を検索…" aria-label="検索">
+                        <button class="search-clear hidden" id="search-clear" aria-label="検索をクリア">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                    <div class="sort-control">
+                        <select id="sort-select" aria-label="並び替え">
+                            <option value="newest">新しい順</option>
+                            <option value="oldest">古い順</option>
+                            <option value="book">本のタイトル順</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 空の状態 -->
+            <div class="empty-state" id="empty-state">
+                <div class="empty-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <h2>まだ記録がありません</h2>
+                <p>本のページを撮影して、大切な言葉を永遠に残しましょう。</p>
+                <button class="btn-primary" id="empty-add-btn">
+                    <i class="fa-solid fa-camera"></i> 最初のページを追加
+                </button>
+            </div>
+
+            <!-- ブックマークグリッド -->
+            <div class="bookmarks-grid" id="bookmarks-grid"></div>
+
+            <!-- 検索結果なし -->
+            <div class="no-results hidden" id="no-results">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <p>「<span id="no-results-query"></span>」に一致する記録が見つかりませんでした。</p>
+            </div>
+        </section>
+
+        <!-- ========== キャプチャビュー ========== -->
+        <section class="view" id="view-capture">
+            <h1 class="section-title">新しいページを追加</h1>
+            <p class="section-desc">本のページを撮影またはアップロードしてください。AIが文字を自動で読み起こします。</p>
+
+            <div class="upload-area" id="upload-area" role="button" tabindex="0" aria-label="画像をアップロード">
+                <input type="file" id="file-input" accept="image/*" capture="environment" aria-label="ファイルを選択"
+                    style="display:none">
+                <div class="upload-icon-wrap">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                </div>
+                <div class="upload-texts">
+                    <p class="upload-main">ここにドラッグ＆ドロップ</p>
+                    <p class="upload-sub">または</p>
+                </div>
+                <div class="upload-buttons">
+                    <button class="btn-upload" id="btn-gallery">
+                        <i class="fa-solid fa-image"></i> ギャラリーから選択
+                    </button>
+                    <button class="btn-upload btn-camera" id="btn-camera">
+                        <i class="fa-solid fa-camera"></i> カメラで撮影
+                    </button>
+                </div>
+                <p class="upload-note">JPG・PNG・HEIC対応 ／ 最大10MB</p>
+            </div>
+
+            <!-- プレビューとクロップ -->
+            <div class="preview-area hidden" id="preview-area">
+                <div class="ocr-settings"
+                    style="display:flex; justify-content:center; gap:24px; margin-bottom:12px; color:var(--text-primary); font-size:15px; background:var(--bg-raised); padding:16px; border-radius:12px; border:1px solid var(--border);">
+                    <label style="cursor:pointer; display:flex; align-items:center; gap:8px;">
+                        <input type="radio" name="text-dir" value="jpn_vert" checked
+                            style="accent-color:var(--gold); transform:scale(1.2);">
+                        縦書きテキスト
+                    </label>
+                    <label style="cursor:pointer; display:flex; align-items:center; gap:8px;">
+                        <input type="radio" name="text-dir" value="jpn+eng"
+                            style="accent-color:var(--gold); transform:scale(1.2);">
+                        横書きテキスト
+                    </label>
+                </div>
+                <div class="preview-actions" style="margin-bottom:16px; display:flex; flex-direction:column; align-items:center; gap:10px;">
+                    <button class="btn-primary btn-large" id="btn-start-ocr">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> 切り抜いた部分を読み起こす
+                    </button>
+                    <button class="btn-secondary" id="btn-start-ocr-full" style="font-size:13px; padding:10px 24px;">
+                        <i class="fa-solid fa-expand"></i> 全体をそのまま読み起こす
+                    </button>
+                </div>
+                <div class="preview-instructions"
+                    style="text-align:center; color:var(--text-secondary); margin-bottom:12px;">
+                    <i class="fa-solid fa-crop-simple" style="color:var(--gold); margin-right:8px;"></i>
+                    読みたい部分だけを切り抜いてください（精度が劇的に向上します）
+                </div>
+                <div class="preview-image-wrap" style="max-height: 50vh;">
+                    <img id="preview-img" src="" alt="アップロードされたページのプレビュー" style="max-width:100%; display:block;">
+                </div>
+                <div style="display:flex; justify-content:flex-end; width:100%; max-width:480px; margin-top:8px;">
+                    <button class="btn-secondary" id="btn-remove-img"
+                        style="min-height:36px; padding:6px 16px; font-size:12px;">
+                        <i class="fa-solid fa-rotate-left"></i> 画像を選び直す
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== OCR処理中ビュー ========== -->
+        <section class="view" id="view-processing">
+            <div class="processing-container">
+                <div class="processing-book">
+                    <div class="book-spine"></div>
+                    <div class="book-page book-page-1"></div>
+                    <div class="book-page book-page-2"></div>
+                    <div class="book-flame">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                </div>
+                <h2 class="processing-title">文字を読み起こしています…</h2>
+                <p class="processing-subtitle" id="processing-status">AIが画像を解析中</p>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <p class="processing-note">日本語・英語どちらも対応しています</p>
+            </div>
+        </section>
+
+        <!-- ========== エディタビュー ========== -->
+        <section class="view" id="view-editor">
+            <div class="editor-layout">
+                <!-- 左：画像 -->
+                <div class="editor-image-panel">
+                    <div class="panel-label">撮影ページ</div>
+                    <div class="editor-img-wrap">
+                        <img id="editor-img" src="" alt="スキャンしたページ">
+                    </div>
+                </div>
+
+                <!-- 右：エディタ -->
+                <div class="editor-text-panel">
+                    <div class="panel-label">読み起こし結果</div>
+
+                    <form autocomplete="off" onsubmit="return false">
+                    <div class="form-group">
+                        <label for="book-title" class="form-label">本のタイトル</label>
+                        <input type="text" id="book-title" class="form-input" placeholder="例: ノルウェイの森"
+                            autocomplete="off" autocorrect="off" autocapitalize="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="book-author" class="form-label">著者名</label>
+                        <input type="text" id="book-author" class="form-input" placeholder="例: 村上春樹"
+                            autocomplete="off" autocorrect="off" autocapitalize="off">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="book-page" class="form-label">ページ番号</label>
+                            <input type="text" id="book-page" class="form-input" placeholder="例: p.147"
+                                autocomplete="off" autocorrect="off" autocapitalize="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="book-tag" class="form-label">タグ</label>
+                            <select id="book-tag" class="form-input">
+                                <option value="">— 選択してください —</option>
+                                <option value="文学・小説">文学・小説</option>
+                                <option value="ビジネス・経済">ビジネス・経済</option>
+                                <option value="教養・人文">教養・人文</option>
+                                <option value="科学・技術">科学・技術</option>
+                                <option value="自己啓発・精神">自己啓発・精神</option>
+                                <option value="実用・暮らし">実用・暮らし</option>
+                                <option value="政治・社会">政治・社会</option>
+                                <option value="芸術・文化">芸術・文化</option>
+                                <option value="学習・語学">学習・語学</option>
+                                <option value="その他">その他</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ocr-text" class="form-label">
+                            読み起こしテキスト
+                            <span class="label-hint">（修正可能）</span>
+                        </label>
+                        <textarea id="ocr-text" class="form-textarea" rows="10" placeholder="ここに読み起こされた文字が表示されます…"
+                            spellcheck="false" autocomplete="off"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user-note" class="form-label">メモ</label>
+                        <textarea id="user-note" class="form-textarea form-textarea-sm" rows="3"
+                            placeholder="この一節についての感想・メモ…" autocomplete="off"></textarea>
+                    </div>
+
+                    <div class="editor-actions">
+                        <button type="button" class="btn-primary" id="btn-save">
+                            <i class="fa-solid fa-bookmark"></i> 保存する
+                        </button>
+                        <button type="button" class="btn-secondary" id="btn-back-capture">
+                            <i class="fa-solid fa-arrow-left"></i> 戻る
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== ブックマーク詳細ビュー ========== -->
+        <section class="view" id="view-detail">
+            <div class="detail-container">
+                <div class="detail-header">
+                    <button class="btn-back" id="btn-back-library" aria-label="ライブラリへ戻る">
+                        <i class="fa-solid fa-arrow-left"></i> ライブラリへ
+                    </button>
+                    <div class="detail-header-actions">
+                        <button class="btn-icon" id="btn-detail-edit" aria-label="編集">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="btn-icon btn-danger" id="btn-detail-delete" aria-label="削除">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="detail-body">
+                    <div class="detail-book-info">
+                        <div class="detail-book-spine"></div>
+                        <div class="detail-book-meta">
+                            <h1 class="detail-book-title" id="detail-book-title">—</h1>
+                            <p class="detail-book-author" id="detail-book-author"></p>
+                            <div class="detail-meta-row">
+                                <span class="detail-page" id="detail-page"></span>
+                                <span class="detail-date" id="detail-date"></span>
+                            </div>
+                            <div class="detail-tags" id="detail-tags"></div>
+                        </div>
+                    </div>
+
+                    <div class="detail-content-grid">
+                        <div class="detail-text-wrap">
+                            <div class="detail-quote-mark">"</div>
+                            <p class="detail-passage" id="detail-passage"></p>
+                            <div class="detail-note-wrap" id="detail-note-wrap">
+                                <p class="detail-note-label"><i class="fa-solid fa-pen-to-square"></i> メモ</p>
+                                <p class="detail-note" id="detail-note"></p>
+                            </div>
+                        </div>
+                        <div class="detail-image-wrap">
+                            <img id="detail-img" src="" alt="本のページ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 前後ブックマーク移動 -->
+            <div class="detail-nav-footer" id="detail-nav-footer">
+                <button class="detail-nav-btn" id="btn-prev-bookmark" aria-label="前のブックマーク">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    <span>前の一節</span>
+                </button>
+                <span class="detail-nav-pos" id="detail-nav-position"></span>
+                <button class="detail-nav-btn" id="btn-next-bookmark" aria-label="次のブックマーク">
+                    <span>次の一節</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- モバイル ボトムナビゲーション -->
+    <nav class="bottom-nav" id="bottom-nav" aria-label="メインナビゲーション">
+        <button class="bottom-nav-btn active" id="bottom-nav-library" aria-label="ライブラリ">
+            <i class="fa-solid fa-books"></i>
+            <span>ライブラリ</span>
+        </button>
+        <button class="bottom-nav-btn" id="bottom-nav-capture" aria-label="追加">
+            <i class="fa-solid fa-camera"></i>
+            <span>追加</span>
+        </button>
+    </nav>
+
+    <!-- 削除確認モーダル -->
+    <div class="modal-overlay hidden" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal">
+            <h3 id="modal-title" class="modal-title">本当に削除しますか？</h3>
+            <p class="modal-text">この操作は取り消せません。</p>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="btn-modal-cancel">キャンセル</button>
+                <button class="btn-danger-solid" id="btn-modal-confirm">削除する</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 保存成功トースト -->
+    <div class="toast hidden" id="toast" role="alert" aria-live="polite">
+        <i class="fa-solid fa-bookmark toast-icon"></i>
+        <span id="toast-msg">保存しました</span>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
