@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Tetris</title>
+    <!-- スタイルシート（見た目の設定）を読み込みます -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fontsからモダンなフォントを読み込みます -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="game-container">
+        <!-- ゲームボード：テトリスのプレイ画面 -->
+        <!-- widthとheightはJavaScriptで設定することもできますが、ここでは固定サイズを指定します -->
+        <!-- 1ブロック30px × 横10ブロック = 300px -->
+        <!-- 1ブロック30px × 縦20ブロック = 600px -->
+        <div class="canvas-wrapper">
+            <canvas id="tetris" width="300" height="600"></canvas>
+
+            <!-- ゲームオーバー画面 / スタート画面 -->
+            <div id="game-over">
+                <h1 id="screen-title">NEON TETRIS</h1>
+                <p id="score-text" class="hidden">Score: <span id="final-score">0</span></p>
+                <button id="restart-btn">Start Game</button>
+            </div>
+
+            <!-- 500点ごとのメッセージ -->
+            <div id="milestone-msg" class="hidden">Got it!</div>
+        </div>
+
+        <!-- サイドパネル：スコアや次のブロックを表示 -->
+        <div class="side-panel">
+            <div class="info-box">
+                <h2>SCORE</h2>
+                <div id="score">0</div>
+            </div>
+
+            <div class="info-box">
+                <h2>HIGH SCORE</h2>
+                <div id="high-score">0</div>
+            </div>
+
+            <div class="info-box">
+                <h2>LEVEL</h2>
+                <div id="level">1</div>
+            </div>
+
+            <div class="info-box">
+                <h2>NEXT</h2>
+                <canvas id="next" width="120" height="120"></canvas>
+            </div>
+
+            <!-- 操作説明 -->
+            <div class="controls-info">
+                <h3>Controls</h3>
+                <p>← → : Move</p>
+                <p>↑ : Rotate</p>
+                <p>↓ : Drop</p>
+                <p>Sound: On</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- モバイル用操作ボタン -->
+    <div class="mobile-controls">
+        <button id="btn-left" class="control-btn">←</button>
+        <button id="btn-rotate" class="control-btn">↻</button>
+        <button id="btn-right" class="control-btn">→</button>
+        <button id="btn-drop" class="control-btn">↓</button>
+        <button id="btn-hard-drop" class="control-btn">⤓</button>
+    </div>
+
+
+    <!-- ゲームのロジック（仕組み）を書いたスクリプトを読み込みます -->
+    <script src="script.js"></script>
+</body>
+
+</html>

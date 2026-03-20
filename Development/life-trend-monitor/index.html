@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-life.png">
+    <title>TOKO Life Trend NEWS | 暮らしのトレンド情報集約サイト</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Noto Sans JP for readability, Oswald for headings -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Oswald:wght@500;700&family=Inter:wght@400;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ヘッダー -->
+    <header class="site-header">
+        <div class="container">
+            <a href="#" class="logo" id="site-logo">
+                <i class="fa-solid fa-compass"></i>
+                <h1><span class="logo-toko">TOKO</span> Life Trend NEWS</h1>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="active" id="home-link">ホーム</a></li>
+                    <li><a href="#column-section">コラム</a></li>
+                    <li><a href="#" id="nav-archive">アーカイブ</a></li>
+                    <li class="nav-dropdown">
+                        <a href="#" id="view-favorites"><i class="fa-solid fa-heart"></i> お気に入り <i
+                                class="fa-solid fa-chevron-down nav-arrow"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="filter-favorites-only"><i class="fa-solid fa-heart-circle-check"></i>
+                                    お気に入りのみ</a></li>
+                            <li><a href="#" id="filter-show-all"><i class="fa-solid fa-list-ul"></i> すべて表示</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <span class="update-info"><i class="fa-solid fa-clock-rotate-left"></i> 毎日7:00更新</span>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ランキングセクション（今週の急上昇） -->
+    <section class="ranking-section">
+        <div class="container">
+            <p class="section-lead">ライフスタイルの最新トレンドを毎日更新</p>
+            <h2 class="section-title"><i class="fa-solid fa-crown" style="color: #f1c40f;"></i> 今週の急上昇トレンド</h2>
+            <div class="ranking-grid" id="ranking-grid">
+                <!-- JSでランキングカードを生成 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ヒーロー / ピックアップ -->
+    <section class="forecast-section">
+        <div class="container">
+            <div class="forecast-banner">
+                <div class="forecast-info">
+                    <span class="forecast-label">PICKUP</span>
+                    <h2 class="forecast-title">社会の潮流をデータで可視化</h2>
+                    <p>博報堂が生活者目線でみらいを分析</p>
+                </div>
+                <a href="https://seikatsusoken.jp/" target="_blank" rel="noopener noreferrer" class="btn-forecast">
+                    詳しく見る <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- カテゴリフィルター & 検索 -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="トレンドを検索（例：AI）">
+            </div>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-category="all">すべて</button>
+                <button class="filter-btn" data-category="wellness">ウェルネス</button>
+                <button class="filter-btn" data-category="living">リビング</button>
+                <button class="filter-btn" data-category="ladies">レディス</button>
+                <button class="filter-btn" data-category="mens">メンズ</button>
+                <button class="filter-btn" data-category="kids">キッズ</button>
+                <button class="filter-btn" data-category="baby">ベビー</button>
+                <button class="filter-btn" data-category="shoes">シューズ</button>
+                <button class="filter-btn" data-category="work">ワークスタイル</button>
+                <button class="filter-btn" data-category="cosme">コスメ</button>
+                <button class="filter-btn" data-category="color">カラー</button>
+                <button class="filter-btn" data-category="sns">SNS</button>
+                <button class="filter-btn" data-category="temperature">気温予測</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ニュースグリッド -->
+    <section class="news-section">
+        <div class="container">
+            <div id="news-grid" class="news-grid">
+                <!-- JavaScriptでここに記事カードを生成 -->
+            </div>
+
+            <div class="archive-action" id="archive-action">
+                <button id="load-archive-btn" class="btn-archive">
+                    過去のトレンドを見る <i class="fa-solid fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- コラムセクション -->
+    <section class="column-section" id="column-section">
+        <div class="container">
+            <h2 class="section-title"><i class="fa-solid fa-lightbulb" style="color: #3498db;"></i> 専門家コラム
+            </h2>
+            <p class="section-subtitle">ライフスタイルのプロが読み解く、トレンドの深層</p>
+            <div class="column-grid" id="column-grid">
+                <!-- JavaScriptでここにコラムカードを生成 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-accent">Life</span> Trend Monitor
+                </div>
+                <div class="copyright">
+                    &copy; 2026 Life Trend Monitor. All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // ---- PWA アップデート通知 ----
+        function showSWUpdateToast(worker) {
+            const existing = document.getElementById('sw-update-toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.id = 'sw-update-toast';
+            toast.innerHTML = `
+                <div class="notif-content">
+                    <i class="fa-solid fa-rotate"></i>
+                    <span>新しいバージョンが公開されました</span>
+                    <button id="sw-update-btn">今すぐ更新</button>
+                    <button id="sw-update-close" aria-label="閉じる"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            `;
+            document.body.appendChild(toast);
+
+            document.getElementById('sw-update-btn').addEventListener('click', () => {
+                worker.postMessage({ type: 'SKIP_WAITING' });
+                toast.remove();
+            });
+            document.getElementById('sw-update-close').addEventListener('click', () => {
+                toast.remove();
+            });
+        }
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => {
+                        console.log('ServiceWorker registration successful with scope: ', reg.scope);
+
+                        // ページ再読み込み時に既に waiting 中の SW がある場合
+                        if (reg.waiting) {
+                            showSWUpdateToast(reg.waiting);
+                        }
+
+                        // 新しい SW のインストールを検知
+                        reg.addEventListener('updatefound', () => {
+                            const newWorker = reg.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    showSWUpdateToast(newWorker);
+                                }
+                            });
+                        });
+                    })
+                    .catch(err => console.log('ServiceWorker registration failed: ', err));
+
+                // SW が切り替わったらページをリロードして最新版を適用
+                let refreshing = false;
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    if (!refreshing) {
+                        refreshing = true;
+                        window.location.reload();
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

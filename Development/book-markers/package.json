@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "start": "serve . -l 3001"
+  },
+  "dependencies": {
+    "cropperjs": "^2.1.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.6"
+  }
+}

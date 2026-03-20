@@ -1,0 +1,484 @@
+/* 
+  全体的な設定
+  Google Fontsの 'Orbitron' を使用して、サイバーパンク・ネオン風の雰囲気にします
+*/
+body {
+    background-color: #333;
+    /* グレーの背景に変更 */
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    /* 縦並びにして下のボタンを表示できるようにする */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* height: 100vhだとスマホではみ出る場合があるためmin-heightに */
+    margin: 0;
+    overflow: hidden;
+    /* 画面スクロールを防ぐ */
+    touch-action: none;
+    /* スマホでのスクロールやズームを防止 */
+}
+
+/* ゲーム全体を囲むコンテナ */
+.game-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    /* 半透明の背景 */
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    /* 全体をぼんやり光らせる */
+}
+
+/* キャンバス（ゲーム画面）のラッパー */
+.canvas-wrapper {
+    position: relative;
+    /* ゲームオーバー画面を重ねるために必要 */
+}
+
+/* ゲーム画面（キャンバス） */
+#tetris {
+    border: 2px solid #0ff;
+    /* シアン色の枠線 */
+    box-shadow: 0 0 15px #0ff;
+    /* シアン色の発光エフェクト（ネオン） */
+    background-color: #000;
+    display: block;
+}
+
+/* サイドパネル（スコアなど） */
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 150px;
+}
+
+/* 情報ボックス（スコア、レベル、Next） */
+.info-box {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid #f0f;
+    /* マゼンタ色の枠線 */
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+.info-box h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: #f0f;
+    text-shadow: 0 0 5px #f0f;
+    /* 文字を発光させる */
+}
+
+.info-box div {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Nextピース表示用のキャンバス */
+#next {
+    background-color: #000;
+    border: 1px solid #333;
+}
+
+/* 操作説明 */
+.controls-info {
+    margin-top: auto;
+    font-size: 0.8rem;
+    color: #aaa;
+    text-align: left;
+}
+
+.controls-info h3 {
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+}
+
+/* ゲームオーバー画面 */
+.hidden {
+    display: none !important;
+}
+
+#game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border: 2px solid #f00;
+    box-shadow: 0 0 30px #f00;
+    text-align: center;
+    z-index: 10;
+}
+
+#game-over h1 {
+    color: #f00;
+    text-shadow: 0 0 10px #f00;
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+#restart-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    background: transparent;
+    color: #0ff;
+    border: 2px solid #0ff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#restart-btn:hover {
+    background: #0ff;
+    color: #000;
+    box-shadow: 0 0 20px #0ff;
+}
+
+/* 500点ごとのエフェクト */
+#milestone-msg {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ff0;
+    /* 黄色 */
+    text-shadow: 0 0 20px #ff0, 0 0 40px #ff0;
+    pointer-events: none;
+    /* クリックを邪魔しない */
+    z-index: 20;
+    opacity: 0;
+}
+
+.animate-got-it {
+    animation: popUpFade 2s ease-out forwards;
+}
+
+@keyframes popUpFade {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -20%) scale(0.5);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    40% {
+        transform: translate(-50%, -50%) scale(1.0);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -60%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -80%);
+    }
+}
+
+/* 画面全体のフラッシュ */
+.flash-screen {
+    animation: flash 0.5s ease-out;
+}
+
+@keyframes flash {
+    0% {
+        background-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 50px #fff inset;
+    }
+
+    100% {
+        background-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+}
+
+/* 1000点ごとの強エフェクト */
+.flash-screen-strong {
+    animation: flashStrong 1s ease-out;
+}
+
+@keyframes flashStrong {
+    0% {
+        background-color: rgba(255, 255, 255, 0.6);
+        /* より明るく */
+        box-shadow: 0 0 100px #fff inset;
+    }
+
+    100% {
+        background-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+}
+
+.animate-good {
+    color: #f0f;
+    /* ピンク/マゼンタ */
+    text-shadow: 0 0 20px #f0f, 0 0 40px #f0f;
+    animation: popOutGood 2s ease-out forwards;
+}
+
+@keyframes popOutGood {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0) rotate(-10deg);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(2.0) rotate(10deg);
+        /* 大きく飛び出す */
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.0) rotate(0deg);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -60%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -100%);
+    }
+}
+
+/* --- モバイル対応スタイル --- */
+
+.mobile-controls {
+    display: none;
+    /* デフォルトは非表示 */
+    margin-top: 20px;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.control-btn {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid #0ff;
+    color: #0ff;
+    font-size: 1.5rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    touch-action: manipulation;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.control-btn:active {
+    background-color: #0ff;
+    color: #000;
+    box-shadow: 0 0 20px #0ff;
+}
+
+#btn-hard-drop {
+    border-color: #f0f;
+    color: #f0f;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+#btn-hard-drop:active {
+    background-color: #f0f;
+    color: #000;
+    box-shadow: 0 0 20px #f0f;
+}
+
+/* スマホ画面向けの調整 */
+@media (max-width: 600px) {
+    body {
+        justify-content: flex-start;
+        padding-top: 10px;
+    }
+
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .side-panel {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        min-width: auto;
+    }
+
+    .info-box {
+        padding: 5px 10px;
+        min-width: 60px;
+    }
+
+    .info-box h2 {
+        font-size: 0.8rem;
+    }
+
+    .info-box div {
+        font-size: 1rem;
+    }
+
+    /* Nextブロックのキャンバスを小さく */
+    #next {
+        width: 60px;
+        height: 60px;
+    }
+
+    .controls-info {
+        display: none;
+        /* スマホではボタンがあるので説明不要 */
+    }
+
+    /* ボタンを表示 */
+    .mobile-controls {
+        display: flex;
+    }
+
+    /* メインキャンバスも少し小さくする調整が必要かも知れませんが、
+       アスペクト比を保ちながらCSSで縮小表示させます */
+    #tetris {
+        max-width: 70vw;
+        /* 画面幅の70%まで */
+        height: auto;
+        aspect-ratio: 1 / 2;
+    }
+}
+
+/* 兵隊アニメーションエリア */
+.soldiers-area {
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    /* 絶対配置 */
+    top: 50%;
+    /* 画面中央 */
+    left: 0;
+    transform: translateY(-50%);
+    /* 中央補正 */
+    overflow: hidden;
+    margin-top: 0;
+    border-top: none;
+    border-bottom: none;
+    background-color: transparent;
+    /* 背景透明 */
+    pointer-events: none;
+    /* クリックを邪魔しない */
+    z-index: 5;
+    /* ゲーム画面より手前（必要なら調整） */
+    opacity: 0.8;
+    /* 少し透けさせる */
+}
+
+.soldiers-track {
+    display: flex;
+    gap: 40px;
+    /* 間隔も広げる */
+    position: absolute;
+    left: 100%;
+    /* 開始位置 */
+    animation: march 8s linear infinite;
+    /* 少し速く */
+    /* 行進アニメーション */
+    align-items: center;
+    /* 垂直方向中央揃え */
+    height: 100%;
+}
+
+/* 兵隊（CSS図形） */
+.soldier {
+    width: 30px;
+    /* 3倍 */
+    height: 60px;
+    /* 3倍 */
+    background-color: #0ff;
+    /* シアン */
+    position: relative;
+    box-shadow: 0 0 10px #0ff;
+    /* 発光強化 */
+}
+
+/* 頭 */
+.soldier::before {
+    content: '';
+    position: absolute;
+    top: -24px;
+    /* 位置調整 */
+    left: 3px;
+    width: 24px;
+    /* 3倍 */
+    height: 24px;
+    /* 3倍 */
+    background-color: #0ff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #0ff;
+}
+
+/* 銃（または槍） */
+.soldier::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    width: 45px;
+    /* 3倍 */
+    height: 6px;
+    /* 太く */
+    background-color: #f0f;
+    /* マゼンタ */
+    transform: rotate(-30deg);
+    box-shadow: 0 0 10px #f0f;
+}
+
+/* 隊列の動き */
+@keyframes march {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-500px);
+        /* 画面外まで移動 */
+    }
+}
+
+/* 背景にも薄く兵隊を表示して賑やかにする */
+body::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: repeating-linear-gradient(90deg,
+            rgba(0, 255, 255, 0.1) 0px,
+            rgba(0, 255, 255, 0.1) 2px,
+            transparent 2px,
+            transparent 20px);
+    z-index: -1;
+    opacity: 0.5;
+}
