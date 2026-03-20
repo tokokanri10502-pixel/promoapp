@@ -1,0 +1,15 @@
+# 依存パッケージ（インストールで生成されるため不要）
+node_modules/
+promo-plan-app/node_modules/
+
+# ビルド成果物（GitHub Actionsでビルドするため不要）
+dist/
+promo-plan-app/dist/
+
+# ログ
+*.log
+npm-debug.log*
+
+# エディタ設定
+.DS_Store
+.vscode/
