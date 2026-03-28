@@ -149,14 +149,14 @@
     <script>
     // v10: 古いデイリー履歴を強制クリア（重複修正のため）
     (function() {
-        var VER = 'v10_pool_dedup';
+        var VER = 'v11_backfill';
         if (localStorage.getItem('life_trend_logic_version') !== VER) {
             localStorage.removeItem('life_trend_daily_history');
             localStorage.setItem('life_trend_logic_version', VER);
         }
     })();
     </script>
-    <script src="script.js?v=2026.03.28.v10"></script>
+    <script src="script.js?v=2026.03.28.v11"></script>
     <script>
         // ---- PWA アップデート通知 ----
         function showSWUpdateToast(worker) {

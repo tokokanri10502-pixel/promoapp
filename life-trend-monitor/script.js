@@ -2505,7 +2505,7 @@ function getDailyUniqueId(dateStr, indexOffset) {
 function injectDailyArticle() {
     const STORAGE_KEY = 'life_trend_daily_history';
     const VERSION_KEY = 'life_trend_logic_version';
-    const CURRENT_VER = 'v10_pool_dedup';
+    const CURRENT_VER = 'v11_backfill';
     const MAX_DAYS = 30;
     const todayStr = getRelativeDate(0);
 
@@ -2523,42 +2523,41 @@ function injectDailyArticle() {
         localStorage.setItem(VERSION_KEY, CURRENT_VER);
     }
 
-    // ── 今日のエントリが未追加なら追加 ──
-    const todayEntries = history.filter(entry => entry.date === todayStr);
-    if (todayEntries.length < ITEMS_PER_DAY) {
-        // 足りない分を追加
-        const indices = getDailyArticleIndicesForDate(todayStr);
-        for (let i = todayEntries.length; i < ITEMS_PER_DAY; i++) {
-            const poolIndex = indices[i];
-            const uniqueId = getDailyUniqueId(todayStr, i);
+    // ── 過去14日分＋今日分をバックフィル ──
+    const BACKFILL_DAYS = 14;
+    let changed = false;
+    for (let d = BACKFILL_DAYS; d >= 0; d--) {
+        const dateStr = getRelativeDate(-d);
+        const dayEntries = history.filter(entry => entry.date === dateStr);
+        if (dayEntries.length >= ITEMS_PER_DAY) continue;
 
-            // 既に同じIDが存在しないかチェック
+        const indices = getDailyArticleIndicesForDate(dateStr);
+        for (let i = dayEntries.length; i < ITEMS_PER_DAY; i++) {
+            const poolIndex = indices[i];
+            const uniqueId = getDailyUniqueId(dateStr, i);
             if (!history.find(entry => entry.uniqueId === uniqueId)) {
-                history.push({ date: todayStr, uniqueId, poolIndex });
+                history.push({ date: dateStr, uniqueId, poolIndex });
+                changed = true;
             }
         }
+    }
 
-        // 上限を超えた古い記事を削除（記事単位で管理。30日分）
-        if (history.length > MAX_DAYS * ITEMS_PER_DAY) {
-            history = history.slice(-(MAX_DAYS * ITEMS_PER_DAY));
-        }
+    // 上限を超えた古い記事を削除
+    if (history.length > MAX_DAYS * ITEMS_PER_DAY) {
+        history = history.slice(-(MAX_DAYS * ITEMS_PER_DAY));
+    }
+    if (changed) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
     }
 
-    // ── 履歴の全エントリを newsData へ注入 ──
-    // 同じpoolIndexは最新日付のもののみ注入する（連日の重複防止）
-    const latestByPool = new Map();
-    history.forEach(entry => {
-        const prev = latestByPool.get(entry.poolIndex);
-        if (!prev || entry.date > prev.date) {
-            latestByPool.set(entry.poolIndex, entry);
-        }
-    });
-
+    // ── 履歴の全エントリを newsData へ注入（同タイトルは最新日付のもののみ）──
+    // まず日付降順にソートし、先に出たタイトルを優先
+    const sorted = [...history].sort((a, b) => b.date.localeCompare(a.date));
     const existingTitles = new Set(newsData.map(d => d.title.trim()));
-    latestByPool.forEach(entry => {
-        const exists = newsData.some(item => item.id === entry.uniqueId);
-        if (exists) return;
+    const injectedIds = new Set(newsData.map(d => d.id));
+
+    sorted.forEach(entry => {
+        if (injectedIds.has(entry.uniqueId)) return;
 
         const template = dailyArticlePool[entry.poolIndex];
         if (!template) return;
@@ -2566,6 +2565,7 @@ function injectDailyArticle() {
 
         const article = { ...template, id: entry.uniqueId, date: entry.date };
         newsData.push(article);
+        injectedIds.add(entry.uniqueId);
         existingTitles.add(template.title.trim());
     });
 }
