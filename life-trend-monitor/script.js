@@ -2320,78 +2320,6 @@ const dailyArticlePool = [
         viewCount: 4100
     },
     {
-        id: 3101,
-        title: "マルニの新作バッグ「パピエ」登場。折り紙から着想を得た造形美",
-        category: "ladies",
-        categoryLabel: "レディス",
-        summary: "バイカラーやレオパード柄のスタイリッシュな新作トートバッグ。折り紙のような構造が、日常に芸術的な彩りを添える。",
-        source: "Fashion Press",
-        sourceUrl: "#",
-        icon: "fa-shopping-bag",
-        gradient: "linear-gradient(135deg, #485563 0%, #29323c 100%)",
-        viewCount: 3100
-    },
-    {
-        id: 3102,
-        title: "Nike『Air Max』最新作、再生素材を使用した環境対応モデル",
-        category: "shoes",
-        categoryLabel: "シューズ",
-        summary: "圧倒的なクッション性はそのままに、製造工程を見直し環境負荷を低減。機能性と持続可能性を両立させた次世代のアイコン。",
-        source: "Nike News",
-        sourceUrl: "#",
-        icon: "fa-bolt",
-        gradient: "linear-gradient(135deg, #f39c12 0%, #d35400 100%)",
-        viewCount: 3500
-    },
-    {
-        id: 3103,
-        title: "生成AIによる「自分専用キャリアコーチ」が仕事の常識を変える",
-        category: "work",
-        categoryLabel: "ワークスタイル",
-        summary: "個人のスキルと志向を学習し、最適なネクストアクションを提案するパーソナルAI。2026年は、AIに相談するビジネスパーソンが多数派に。",
-        source: "Career Weekly",
-        sourceUrl: "#",
-        icon: "fa-user-tie",
-        gradient: "linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%)",
-        viewCount: 2100
-    },
-    {
-        id: 3104,
-        title: "サステナブルな『おさがり』プラットフォーム、キッズ市場で急成長",
-        category: "kids",
-        categoryLabel: "キッズ",
-        summary: "成長の早い子供服を、品質を維持したまま循環させる新サービス。親世代の環境意識の高まりを受け、リユースが当たり前の選択肢に。",
-        source: "Family Tech",
-        sourceUrl: "#",
-        icon: "fa-child",
-        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
-        viewCount: 1420
-    },
-    {
-        id: 3105,
-        title: "Instagramで話題の『淡色カフェ』、全国各地で集客記録を更新",
-        category: "sns",
-        categoryLabel: "SNS",
-        summary: "ベージュや白を基調とした内装。写真映えだけでなく、その空間での「体験」を共有することがステータスとなるカルチャーの定着。",
-        source: "Insta Vibes",
-        sourceUrl: "#",
-        icon: "fa-brands fa-instagram",
-        gradient: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
-        viewCount: 4200
-    },
-    {
-        id: 3106,
-        title: "ユニクロ『次世代ライフウェア』、AI分析による究極のフィット感",
-        category: "mens",
-        categoryLabel: "メンズ",
-        summary: "100万人の体型データから導き出した、誰にでも似合う黄金シルエット。ベーシックの枠を超えた「機能美」の到達点。",
-        source: "Uniqlo Press",
-        sourceUrl: "#",
-        icon: "fa-shirt",
-        gradient: "linear-gradient(135deg, #ff0000 0%, #cc0000 100%)",
-        viewCount: 3200
-    },
-    {
         id: 3107,
         title: "TikTok発『#今日のコーデ』、10億再生超えで街のファッションを変える",
         category: "sns",
@@ -2576,6 +2504,8 @@ function getDailyUniqueId(dateStr, indexOffset) {
 // ========================================
 function injectDailyArticle() {
     const STORAGE_KEY = 'life_trend_daily_history';
+    const VERSION_KEY = 'life_trend_logic_version';
+    const CURRENT_VER = 'v10_pool_dedup';
     const MAX_DAYS = 30;
     const todayStr = getRelativeDate(0);
 
@@ -2587,6 +2517,12 @@ function injectDailyArticle() {
         history = [];
     }
 
+    // ── バージョン変更時は全履歴をリセット（プール変更によるインデックスずれ防止）──
+    if (localStorage.getItem(VERSION_KEY) !== CURRENT_VER) {
+        history = [];
+        localStorage.setItem(VERSION_KEY, CURRENT_VER);
+    }
+
     // ── 今日のエントリが未追加なら追加 ──
     const todayEntries = history.filter(entry => entry.date === todayStr);
     if (todayEntries.length < ITEMS_PER_DAY) {
@@ -2595,7 +2531,7 @@ function injectDailyArticle() {
         for (let i = todayEntries.length; i < ITEMS_PER_DAY; i++) {
             const poolIndex = indices[i];
             const uniqueId = getDailyUniqueId(todayStr, i);
-            
+
             // 既に同じIDが存在しないかチェック
             if (!history.find(entry => entry.uniqueId === uniqueId)) {
                 history.push({ date: todayStr, uniqueId, poolIndex });
@@ -2610,15 +2546,27 @@ function injectDailyArticle() {
     }
 
     // ── 履歴の全エントリを newsData へ注入 ──
+    // 同じpoolIndexは最新日付のもののみ注入する（連日の重複防止）
+    const latestByPool = new Map();
     history.forEach(entry => {
-        const exists = newsData.some(item => item.id === entry.uniqueId);
-        if (!exists) {
-            const template = dailyArticlePool[entry.poolIndex];
-            if (template) {
-                const article = { ...template, id: entry.uniqueId, date: entry.date };
-                newsData.push(article);
-            }
+        const prev = latestByPool.get(entry.poolIndex);
+        if (!prev || entry.date > prev.date) {
+            latestByPool.set(entry.poolIndex, entry);
         }
+    });
+
+    const existingTitles = new Set(newsData.map(d => d.title.trim()));
+    latestByPool.forEach(entry => {
+        const exists = newsData.some(item => item.id === entry.uniqueId);
+        if (exists) return;
+
+        const template = dailyArticlePool[entry.poolIndex];
+        if (!template) return;
+        if (existingTitles.has(template.title.trim())) return;
+
+        const article = { ...template, id: entry.uniqueId, date: entry.date };
+        newsData.push(article);
+        existingTitles.add(template.title.trim());
     });
 }
 
