@@ -16,7 +16,7 @@ const ThemeForm = ({ themeData, setThemeData }) => {
         <Target className="w-5 h-5 text-secondary-600" />
         重点月間テーマ・施策
       </h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
           <div>
@@ -44,7 +44,7 @@ const ThemeForm = ({ themeData, setThemeData }) => {
             />
           </div>
         </div>
-        
+
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">

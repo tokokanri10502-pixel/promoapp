@@ -81,10 +81,10 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 font-sans print:bg-white pb-20">
       <Header year={year} month={month} setYear={setYear} setMonth={setMonth} />
-      
+
       {/* 印刷用にはパディングを調整、横幅をフル活用する */}
       <main id="pdf-export-content" className="w-full px-2 sm:px-6 lg:px-8 py-6 max-w-[1600px] mx-auto print:p-0 print:max-w-none bg-white">
-        
+
         <div className="mb-4 border-b-2 border-primary-500 pb-2">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
             <h2 className="text-2xl font-black text-gray-800 tracking-tight">
@@ -118,8 +118,8 @@ function App() {
             <PromotionBody month={month} themeData={themeData} setThemeData={setThemeData} />
           </div>
           <div className="lg:col-span-1 print-col-side">
-            <MonthlyCalendar 
-              monthCalendar={monthCalendar} 
+            <MonthlyCalendar
+              monthCalendar={monthCalendar}
               notes={calendarNotes}
               onNoteChange={updateCalendarNote}
             />
@@ -133,8 +133,8 @@ function App() {
             週別MD・販促詳細計画
           </h3>
           <p className="text-sm text-gray-500 mb-2 no-print">※ セルをクリックすると編集できます（編集後は上段の「データを保存」ボタンを押してください）</p>
-          <WeeklyMDTable 
-            monthCalendar={monthCalendar} 
+          <WeeklyMDTable
+            monthCalendar={monthCalendar}
             plans={weeklyPlans}
             updatePlan={updateWeeklyPlan}
           />

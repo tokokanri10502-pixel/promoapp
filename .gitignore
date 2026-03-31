@@ -1,5 +1,23 @@
+<<<<<<< HEAD
 node_modules
 dist
 .env
 .env.local
 .DS_Store
+=======
+# 依存パッケージ（インストールで生成されるため不要）
+node_modules/
+**/node_modules/
+
+# ビルド成果物（GitHub Actionsでビルドするため不要）
+dist/
+**/dist/
+
+# ログ
+*.log
+npm-debug.log*
+
+# エディタ設定
+.DS_Store
+.vscode/
+>>>>>>> 3e0fef7638540a021abca22e2a5fb90884617185

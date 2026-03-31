@@ -17,7 +17,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
           📅 月間カレンダー
         </h3>
       </div>
-      
+
       <div className="p-4">
         <div className="grid grid-cols-7 gap-1 mb-2">
           {daysOfWeek.map(day => (
@@ -26,17 +26,17 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
             </div>
           ))}
         </div>
-        
+
         <div className="grid grid-cols-7 gap-1 border-t border-l border-gray-200">
           {allDays.map((dayObj, index) => {
             const isWeekend = dayObj.isWeekend;
             const isCurrent = dayObj.isCurrentMonth;
             const dateKey = getDateKey(dayObj.date);
             const noteValue = notes[dateKey] || '';
-            
+
             let bgClass = "bg-white";
             let textClass = "text-gray-800";
-            
+
             if (!isCurrent) {
               bgClass = "bg-gray-50";
               textClass = "text-gray-400";
@@ -50,10 +50,10 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
               bgClass = "bg-red-50";
               textClass = "text-red-700";
             }
-            
+
             return (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`min-h-[90px] h-[90px] border-r border-b border-gray-200 p-1 flex flex-col ${bgClass}`}
               >
                 <div className="flex justify-between items-start mb-1">
@@ -66,7 +66,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                     </span>
                   )}
                 </div>
-                
+
                 {isCurrent && (
                   <textarea
                     value={noteValue}

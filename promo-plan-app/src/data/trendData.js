@@ -1,0 +1,283 @@
+// 昨年の月別トレンドデータ（AI推定）
+// 西日本エリア（広島・福岡・高松）の季節・行事を考慮
+
+const trendData = {
+  1: {
+    items: [
+      { rank: 1, name: 'おせち料理',     comment: 'お正月の定番' },
+      { rank: 2, name: '雑煮',           comment: '地域で具材が変わる' },
+      { rank: 3, name: '七草粥',         comment: '1月7日に食べる習慣' },
+      { rank: 4, name: 'ぶり',           comment: '冬の出世魚' },
+      { rank: 5, name: '鍋料理',         comment: '寒い季節の定番' },
+    ],
+    risingWords: [
+      { rank: 1, word: '正月太り 解消' },
+      { rank: 2, word: '福袋 中身 レシピ' },
+      { rank: 3, word: '成人式 お祝い 料理' },
+      { rank: 4, word: '冬ダイエット 食事' },
+      { rank: 5, word: '鏡開き ぜんざい' },
+    ],
+    snsTopics: [
+      { emoji: '🎍', tag: '#お正月ごはん' },
+      { emoji: '👘', tag: '#成人式コーデ' },
+      { emoji: '🌅', tag: '#初日の出' },
+      { emoji: '💪', tag: '#今年こそダイエット' },
+      { emoji: '☃️', tag: '#冬の景色' },
+    ],
+  },
+  2: {
+    items: [
+      { rank: 1, name: '恵方巻',         comment: '節分に丸かぶり' },
+      { rank: 2, name: '牡蠣',           comment: '旬のピーク・広島産' },
+      { rank: 3, name: 'チョコレート',   comment: 'バレンタインに手作り' },
+      { rank: 4, name: '大豆・いり豆',   comment: '節分の豆まき用' },
+      { rank: 5, name: 'いちご',         comment: '春イチゴが出始め' },
+    ],
+    risingWords: [
+      { rank: 1, word: 'バレンタイン 手作り' },
+      { rank: 2, word: '恵方巻 具材 おすすめ' },
+      { rank: 3, word: '生チョコ 簡単レシピ' },
+      { rank: 4, word: '節分 豆まき いつ' },
+      { rank: 5, word: '花粉症 始まり 食事' },
+    ],
+    snsTopics: [
+      { emoji: '🍫', tag: '#バレンタイン手作り' },
+      { emoji: '🌹', tag: '#バレンタインスイーツ' },
+      { emoji: '👹', tag: '#節分恵方巻' },
+      { emoji: '🍓', tag: '#いちごスイーツ' },
+      { emoji: '💝', tag: '#推しチョコ' },
+    ],
+  },
+  3: {
+    items: [
+      { rank: 1, name: 'ちらし寿司',     comment: 'ひな祭りの定番' },
+      { rank: 2, name: '菜の花',         comment: '春の苦味が旬' },
+      { rank: 3, name: 'あさり',         comment: '潮干狩り・酒蒸し' },
+      { rank: 4, name: '桜もち',         comment: 'ひな祭りスイーツ' },
+      { rank: 5, name: '春キャベツ',     comment: '柔らかく甘みが増す' },
+    ],
+    risingWords: [
+      { rank: 1, word: 'ホワイトデー お返し' },
+      { rank: 2, word: '卒業パーティー 料理' },
+      { rank: 3, word: '花粉症 食事 対策' },
+      { rank: 4, word: '春財布 縁起 いつ' },
+      { rank: 5, word: '新生活 節約 レシピ' },
+    ],
+    snsTopics: [
+      { emoji: '🌸', tag: '#ひな祭りスイーツ' },
+      { emoji: '🎓', tag: '#卒業式コーデ' },
+      { emoji: '🌿', tag: '#春色ネイル' },
+      { emoji: '🍓', tag: '#いちごスイーツ巡り' },
+      { emoji: '🌼', tag: '#花粉症対策グッズ' },
+    ],
+  },
+  4: {
+    items: [
+      { rank: 1, name: 'たけのこ',       comment: '春の味覚の王様' },
+      { rank: 2, name: '鯛',             comment: '花見・お祝いの魚' },
+      { rank: 3, name: '新玉ねぎ',       comment: '生でも美味しい' },
+      { rank: 4, name: '花見弁当',       comment: 'GW前の行楽需要' },
+      { rank: 5, name: 'いちご大福',     comment: '春の和スイーツ' },
+    ],
+    risingWords: [
+      { rank: 1, word: '花見 弁当 簡単' },
+      { rank: 2, word: 'GW 旅行 食べ物' },
+      { rank: 3, word: '新入社員 歓迎 料理' },
+      { rank: 4, word: 'たけのこ あく抜き' },
+      { rank: 5, word: '春野菜 炒め レシピ' },
+    ],
+    snsTopics: [
+      { emoji: '🌸', tag: '#花見弁当' },
+      { emoji: '🌷', tag: '#春コーデ' },
+      { emoji: '📸', tag: '#桜スポット' },
+      { emoji: '🎒', tag: '#新生活グッズ' },
+      { emoji: '🍡', tag: '#花見スイーツ' },
+    ],
+  },
+  5: {
+    items: [
+      { rank: 1, name: 'かしわもち',     comment: 'こどもの日の定番' },
+      { rank: 2, name: '新じゃが',       comment: 'ホクホク食感が人気' },
+      { rank: 3, name: 'アスパラガス',   comment: '春の旬野菜' },
+      { rank: 4, name: 'カレーライス',   comment: 'GW家族ごはん需要' },
+      { rank: 5, name: 'そら豆',         comment: '旬が短い貴重な豆' },
+    ],
+    risingWords: [
+      { rank: 1, word: 'こどもの日 ごちそう' },
+      { rank: 2, word: 'GW バーベキュー 食材' },
+      { rank: 3, word: '母の日 手料理 プレゼント' },
+      { rank: 4, word: '初夏 食欲 レシピ' },
+      { rank: 5, word: 'ピクニック 弁当 おかず' },
+    ],
+    snsTopics: [
+      { emoji: '🎏', tag: '#こどもの日ごはん' },
+      { emoji: '🌹', tag: '#母の日プレゼント' },
+      { emoji: '🔥', tag: '#GWバーベキュー' },
+      { emoji: '🧺', tag: '#ピクニックコーデ' },
+      { emoji: '🌿', tag: '#新緑ドライブ' },
+    ],
+  },
+  6: {
+    items: [
+      { rank: 1, name: '梅干し・梅酒',   comment: '梅仕事の季節' },
+      { rank: 2, name: 'トマト',         comment: '夏野菜が出回る' },
+      { rank: 3, name: '冷やし中華',     comment: '梅雨明けに向けて' },
+      { rank: 4, name: '枝豆',           comment: 'ビールのお供に定番' },
+      { rank: 5, name: 'きゅうり',       comment: '夏の浅漬けに人気' },
+    ],
+    risingWords: [
+      { rank: 1, word: '梅仕事 初心者 作り方' },
+      { rank: 2, word: '父の日 料理 プレゼント' },
+      { rank: 3, word: '夏バテ 予防 食事' },
+      { rank: 4, word: '梅雨 食欲 ない 対策' },
+      { rank: 5, word: '冷やし料理 簡単 夏' },
+    ],
+    snsTopics: [
+      { emoji: '🍺', tag: '#父の日ビール' },
+      { emoji: '🫙', tag: '#梅仕事記録' },
+      { emoji: '☔', tag: '#梅雨コーデ' },
+      { emoji: '🧴', tag: '#日焼け止めレビュー' },
+      { emoji: '🌊', tag: '#梅雨明け待ち' },
+    ],
+  },
+  7: {
+    items: [
+      { rank: 1, name: 'うなぎ',         comment: '土用の丑でピーク' },
+      { rank: 2, name: 'そうめん',       comment: '七夕・夏の定番麺' },
+      { rank: 3, name: 'スイカ',         comment: '夏の風物詩' },
+      { rank: 4, name: 'かき氷シロップ', comment: '自宅かき氷が人気' },
+      { rank: 5, name: 'ゴーヤ',         comment: '夏バテ防止・チャンプル' },
+    ],
+    risingWords: [
+      { rank: 1, word: '土用の丑 うなぎ いつ' },
+      { rank: 2, word: '七夕 そうめん 由来' },
+      { rank: 3, word: '熱中症 食べ物 対策' },
+      { rank: 4, word: '夏祭り 屋台 レシピ' },
+      { rank: 5, word: '冷凍 作り置き 夏' },
+    ],
+    snsTopics: [
+      { emoji: '🎆', tag: '#花火大会コーデ' },
+      { emoji: '🍧', tag: '#かき氷アレンジ' },
+      { emoji: '🌻', tag: '#夏の絶景スポット' },
+      { emoji: '👘', tag: '#浴衣コーデ' },
+      { emoji: '🎋', tag: '#七夕短冊' },
+    ],
+  },
+  8: {
+    items: [
+      { rank: 1, name: 'バーベキュー食材', comment: 'お盆・夏休みに急増' },
+      { rank: 2, name: 'そうめん',        comment: 'お盆の定番料理' },
+      { rank: 3, name: 'スイカ',          comment: '夏の終わりまで人気' },
+      { rank: 4, name: 'ゴーヤチャンプル', comment: '沖縄料理が夏に浸透' },
+      { rank: 5, name: 'とうもろこし',    comment: '旬の甘みが最高潮' },
+    ],
+    risingWords: [
+      { rank: 1, word: 'お盆 帰省 手土産' },
+      { rank: 2, word: 'BBQ 簡単 肉 漬け' },
+      { rank: 3, word: '夏休み 子ども 料理' },
+      { rank: 4, word: '残暑 乗り切る 食事' },
+      { rank: 5, word: '新学期 弁当 作り置き' },
+    ],
+    snsTopics: [
+      { emoji: '🏖️', tag: '#夏の思い出' },
+      { emoji: '🎑', tag: '#お盆帰省グルメ' },
+      { emoji: '🍉', tag: '#スイカ割り' },
+      { emoji: '🌙', tag: '#夏の夜空' },
+      { emoji: '📚', tag: '#夏休み最終日' },
+    ],
+  },
+  9: {
+    items: [
+      { rank: 1, name: 'さんま',          comment: '秋の代名詞・塩焼き' },
+      { rank: 2, name: '月見団子',        comment: 'お月見シーズン' },
+      { rank: 3, name: '栗',              comment: '栗ご飯・スイーツ用' },
+      { rank: 4, name: 'きのこ',          comment: '松茸・しめじ・舞茸' },
+      { rank: 5, name: '梨',              comment: '旬の秋フルーツ' },
+    ],
+    risingWords: [
+      { rank: 1, word: 'お月見 団子 作り方' },
+      { rank: 2, word: '秋の味覚 旬 食材' },
+      { rank: 3, word: '敬老の日 料理 喜ばれる' },
+      { rank: 4, word: '栗ご飯 簡単 レシピ' },
+      { rank: 5, word: '秋バテ 食欲 回復' },
+    ],
+    snsTopics: [
+      { emoji: '🌕', tag: '#お月見ごはん' },
+      { emoji: '🍂', tag: '#秋の味覚' },
+      { emoji: '🌾', tag: '#稲刈り体験' },
+      { emoji: '🍁', tag: '#秋色コーデ' },
+      { emoji: '🌰', tag: '#栗スイーツ' },
+    ],
+  },
+  10: {
+    items: [
+      { rank: 1, name: 'かぼちゃ料理',    comment: 'ハロウィン需要急増' },
+      { rank: 2, name: 'さつまいも',      comment: '焼き芋・スイーツ人気' },
+      { rank: 3, name: 'きのこ鍋',        comment: '鍋シーズン始まり' },
+      { rank: 4, name: 'さんま',          comment: 'まだ旬・安値安定' },
+      { rank: 5, name: 'りんご',          comment: '秋の果物の王道' },
+    ],
+    risingWords: [
+      { rank: 1, word: 'ハロウィン 料理 飾り' },
+      { rank: 2, word: 'かぼちゃ スイーツ 簡単' },
+      { rank: 3, word: '焼き芋 スーパー いつから' },
+      { rank: 4, word: '鍋 スープ 種類 おすすめ' },
+      { rank: 5, word: '運動会 弁当 秋' },
+    ],
+    snsTopics: [
+      { emoji: '🎃', tag: '#ハロウィンコスプレ' },
+      { emoji: '🍠', tag: '#焼き芋アレンジ' },
+      { emoji: '🍂', tag: '#紅葉スポット' },
+      { emoji: '👻', tag: '#ハロウィンスイーツ' },
+      { emoji: '🌰', tag: '#秋のピクニック' },
+    ],
+  },
+  11: {
+    items: [
+      { rank: 1, name: '鍋料理',          comment: '冬鍋シーズン本番' },
+      { rank: 2, name: '牡蠣',            comment: '広島産が出回り始め' },
+      { rank: 3, name: 'おでん',          comment: '寒い日の定番' },
+      { rank: 4, name: '白菜',            comment: '鍋に欠かせない旬野菜' },
+      { rank: 5, name: 'みかん',          comment: '温州みかんが旬' },
+    ],
+    risingWords: [
+      { rank: 1, word: '鍋 スープ 種類 比較' },
+      { rank: 2, word: '七五三 お祝い 料理' },
+      { rank: 3, word: '冬 体 温める 食べ物' },
+      { rank: 4, word: 'おでん 具材 ランキング' },
+      { rank: 5, word: 'ボジョレー 合う 料理' },
+    ],
+    snsTopics: [
+      { emoji: '🍁', tag: '#紅葉狩り' },
+      { emoji: '🦃', tag: '#七五三お参り' },
+      { emoji: '🧣', tag: '#秋冬コーデ' },
+      { emoji: '🍷', tag: '#ボジョレー解禁' },
+      { emoji: '🌃', tag: '#イルミネーション' },
+    ],
+  },
+  12: {
+    items: [
+      { rank: 1, name: 'クリスマスケーキ', comment: 'イブに向けて急増' },
+      { rank: 2, name: 'ローストチキン',   comment: 'クリスマスの定番' },
+      { rank: 3, name: '年越しそば',       comment: '大晦日に向けて' },
+      { rank: 4, name: 'かぼちゃ',        comment: '冬至（22日頃）需要' },
+      { rank: 5, name: 'おせち食材',      comment: '年末に仕込み需要' },
+    ],
+    risingWords: [
+      { rank: 1, word: 'クリスマス 手作りケーキ' },
+      { rank: 2, word: '冬至 かぼちゃ ゆず湯' },
+      { rank: 3, word: '年末 大掃除 後 ごはん' },
+      { rank: 4, word: 'おせち 通販 早割' },
+      { rank: 5, word: '忘年会 料理 おつまみ' },
+    ],
+    snsTopics: [
+      { emoji: '🎄', tag: '#クリスマスコーデ' },
+      { emoji: '🎂', tag: '#手作りクリスマスケーキ' },
+      { emoji: '✨', tag: '#イルミネーションデート' },
+      { emoji: '🎍', tag: '#年末の大掃除' },
+      { emoji: '🥂', tag: '#年越しカウントダウン' },
+    ],
+  },
+};
+
+export default trendData;

@@ -44,7 +44,7 @@ const WeeklyMDTable = ({ monthCalendar, plans, updatePlan }) => {
                   <div className="font-bold text-gray-800 text-center mb-1">第{week.weekNumber}週</div>
                   <div className="text-[10px] text-gray-500 text-center">{week.label}</div>
                 </td>
-                
+
                 {/* 暮らしの歳時記 */}
                 <td className="p-1 border-r border-gray-300 align-top">
                   <EditableCell
@@ -56,37 +56,37 @@ const WeeklyMDTable = ({ monthCalendar, plans, updatePlan }) => {
 
                 {/* 重点テーマ */}
                 <td className="p-1 border-r border-gray-300 align-top">
-                  <EditableCell 
-                    value={weekPlan.theme || ''} 
-                    onChange={(val) => updatePlan(weekKey, 'theme', val)} 
-                    placeholder="テーマ名など" 
+                  <EditableCell
+                    value={weekPlan.theme || ''}
+                    onChange={(val) => updatePlan(weekKey, 'theme', val)}
+                    placeholder="テーマ名など"
                   />
                 </td>
 
                 {/* 生活行動とプロモーション */}
                 <td className="p-1 border-r border-gray-300 align-top">
-                  <EditableCell 
-                    value={weekPlan.lifestyle_promo || ''} 
-                    onChange={(val) => updatePlan(weekKey, 'lifestyle_promo', val)} 
-                    placeholder="生活行動やプロモーションの詳細" 
+                  <EditableCell
+                    value={weekPlan.lifestyle_promo || ''}
+                    onChange={(val) => updatePlan(weekKey, 'lifestyle_promo', val)}
+                    placeholder="生活行動やプロモーションの詳細"
                   />
                 </td>
 
                 {/* 販促施策 */}
                 <td className="p-1 border-r border-gray-300 align-top">
-                  <EditableCell 
-                    value={weekPlan.promotion || ''} 
-                    onChange={(val) => updatePlan(weekKey, 'promotion', val)} 
-                    placeholder="前年のチラシ内容・イベント等" 
+                  <EditableCell
+                    value={weekPlan.promotion || ''}
+                    onChange={(val) => updatePlan(weekKey, 'promotion', val)}
+                    placeholder="前年のチラシ内容・イベント等"
                   />
                 </td>
 
                 {/* 独自施策 */}
                 <td className="p-1 align-top">
-                  <EditableCell 
-                    value={weekPlan.custom || ''} 
-                    onChange={(val) => updatePlan(weekKey, 'custom', val)} 
-                    placeholder="個店ごとの施策や差替え" 
+                  <EditableCell
+                    value={weekPlan.custom || ''}
+                    onChange={(val) => updatePlan(weekKey, 'custom', val)}
+                    placeholder="個店ごとの施策や差替え"
                   />
                 </td>
               </tr>

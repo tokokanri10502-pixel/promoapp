@@ -13,7 +13,7 @@ const ActionButtons = ({ year, month }) => {
   const handleDownloadPDF = async () => {
     try {
       setIsGeneratingPDF(true);
-      
+
       const element = document.getElementById('pdf-export-content');
       if (!element) {
         alert("PDF化する内容が見つかりません。");
@@ -27,8 +27,8 @@ const ActionButtons = ({ year, month }) => {
       });
 
       const canvas = await html2canvas(element, {
-        scale: 2, // 高解像度のために2倍スケールでキャプチャ
-        useCORS: true, // 外部画像の読み込み許可
+        scale: 2,
+        useCORS: true,
         backgroundColor: '#ffffff'
       });
 
@@ -38,22 +38,18 @@ const ActionButtons = ({ year, month }) => {
       });
 
       const imgData = canvas.toDataURL('image/png');
-      
-      // Calculate PDF dimensions (A4 portrait size: 210 x 297 mm as default, but landscape might be better?)
-      // Use dimensions of canvas to calculate PDF size keeping aspect ratio
-      const pdf = new jsPDF('l', 'mm', 'a4'); // 'p' for portrait, 'l' for landscape
-      
+
+      const pdf = new jsPDF('l', 'mm', 'a4');
+
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      
+
       let heightLeft = pdfHeight;
       let position = 0;
-      
-      // Page 1
+
       pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
       heightLeft -= pdf.internal.pageSize.getHeight();
-      
-      // Add extra pages if content is taller than A4
+
       while (heightLeft >= 0) {
         position = heightLeft - pdfHeight;
         pdf.addPage();
@@ -81,7 +77,7 @@ const ActionButtons = ({ year, month }) => {
         <Printer className="w-4 h-4" />
         プレビュー・印刷
       </button>
-      
+
       <button
         onClick={handleDownloadPDF}
         disabled={isGeneratingPDF}

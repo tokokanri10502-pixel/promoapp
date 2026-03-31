@@ -1,0 +1,16 @@
+{
+  "name": "TOKO Life Trend NEWS",
+  "short_name": "TOKO Life",
+  "icons": [
+    {
+      "src": "icon-life.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+}
