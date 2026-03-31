@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import trendData from '../data/trendData';
 
 const FoodItem = ({ item }) => (
@@ -33,18 +33,23 @@ const Divider = () => (
 
 const TrendPanel = ({ month }) => {
   const data = trendData[month];
+  const [isOpen, setIsOpen] = useState(false);
   if (!data) return null;
 
   return (
     <div className="no-print mt-2 px-4 py-2.5 bg-violet-50 border-l-4 border-violet-300 rounded-r-lg">
-      <div className="flex items-center gap-2 mb-2">
+      <button
+        onClick={() => setIsOpen(prev => !prev)}
+        className="flex items-center gap-2 w-full text-left"
+      >
         <span className="text-base leading-none">🔍</span>
         <span className="text-xs font-semibold text-violet-600 tracking-wide">
           昨年{month}月のトレンド（AI推定）
         </span>
-      </div>
+        <span className="ml-auto text-violet-400 text-xs">{isOpen ? '▲ 閉じる' : '▼ 開く'}</span>
+      </button>
 
-      <div className="flex flex-col sm:flex-row sm:items-start sm:divide-x sm:divide-violet-200 gap-3 sm:gap-0">
+      {isOpen && <div className="flex flex-col sm:flex-row sm:items-start sm:divide-x sm:divide-violet-200 gap-3 sm:gap-0 mt-2">
 
         {/* 食材TOP5：モバイル全幅 / タブレット左半分 / デスクトップ38% */}
         <div className="sm:pr-4 sm:w-1/2 lg:w-[38%]">
@@ -73,9 +78,9 @@ const TrendPanel = ({ month }) => {
 
         </div>
 
-      </div>
+      </div>}
 
-      <p className="text-[10px] text-gray-300 text-right mt-1.5">✨ AI推定データ</p>
+      {isOpen && <p className="text-[10px] text-gray-300 text-right mt-1.5">✨ AI推定データ</p>}
     </div>
   );
 };
