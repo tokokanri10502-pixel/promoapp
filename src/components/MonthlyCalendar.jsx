@@ -66,6 +66,11 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                       {dayObj.holidayName}
                     </span>
                   )}
+                  {!dayObj.isHoliday && isCurrent && getEventsForDate(dayObj.date.getMonth() + 1, dayObj.date.getDate(), dayObj.date.getFullYear()).includes('ゆめトクサンデー') && (
+                    <span className="text-[9px] text-orange-600 font-bold leading-tight text-right w-11 truncate">
+                      ゆめトク
+                    </span>
+                  )}
                 </div>
 
                 {isCurrent && (
