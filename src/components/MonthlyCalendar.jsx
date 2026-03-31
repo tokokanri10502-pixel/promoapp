@@ -96,7 +96,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                         onNoteChange(dateKey, e.target.value);
                       }
                     }}
-                    placeholder="メモ..."
+                    placeholder=""
                     className="w-full flex-grow bg-transparent text-[10px] leading-tight resize-none outline-none focus:bg-primary-50 rounded p-0.5 border border-transparent hover:border-gray-200 focus:border-primary-300 placeholder-gray-300 overflow-hidden cursor-text"
                     maxLength={30}
                   />
