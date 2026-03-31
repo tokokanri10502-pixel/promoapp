@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #fff7ed;
+  --color-primary-100: #ffedd5;
+  --color-primary-500: #f97316;
+  --color-primary-600: #ea580c;
+  --color-secondary-50: #f0fdf4;
+  --color-secondary-100: #dcfce7;
+  --color-secondary-500: #22c55e;
+  --color-secondary-600: #16a34a;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #f9fafb;
+  color: #1f2937;
+}
+
+/* 印刷用スタイル */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+  body {
+    background: white;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-break-inside-avoid {
+    break-inside: avoid;
+  }
+  .print-break-after-page {
+    break-after: page;
+  }
+  /* 印刷時：タイトル＋重点テーマを1ページ目に収める */
+  .print-layout-grid {
+    display: block !important;
+  }
+  .print-layout-grid > .print-col-main {
+    width: 100% !important;
+    break-after: page;
+  }
+  .print-layout-grid > .print-col-side {
+    width: 100% !important;
+  }
+}
