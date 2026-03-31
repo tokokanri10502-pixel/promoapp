@@ -52,6 +52,7 @@ const WeatherBanner = ({ weather, loading, error, month }) => {
         <span className="text-base leading-none">{icon}</span>
         <span className="text-xs font-semibold text-sky-600 tracking-wide">
           昨年（{weather.year}年{weather.month}月）の気温実績
+          {weather.isFallback && <span className="ml-2 text-gray-400 font-normal">※平年値</span>}
         </span>
       </div>
       <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-6 pl-1">
