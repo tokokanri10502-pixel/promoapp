@@ -28,9 +28,10 @@ const WeeklyMDTable = ({ monthCalendar, plans, updatePlan }) => {
             const autoEventsText = week.days.flatMap((dayObj) => {
               const m = dayObj.date.getMonth() + 1;
               const d = dayObj.date.getDate();
+              const y = dayObj.date.getFullYear();
               const eventSet = new Set();
               if (dayObj.isHoliday) eventSet.add(dayObj.holidayName);
-              getEventsForDate(m, d).forEach(ev => eventSet.add(ev));
+              getEventsForDate(m, d, y).forEach(ev => eventSet.add(ev));
               return Array.from(eventSet).map(ev => `${m}/${d}(${dayObj.dayOfWeek}): ${ev}`);
             }).join('\n');
 
