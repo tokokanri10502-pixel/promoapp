@@ -57,21 +57,36 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                 key={index}
                 className={`min-h-[90px] h-[90px] border-r border-b border-gray-200 p-1 flex flex-col ${bgClass}`}
               >
-                <div className="flex justify-between items-start mb-1">
-                  <span className={`text-xs ${textClass}`}>
-                    {dayObj.date.getDate()}
-                  </span>
-                  {dayObj.isHoliday && (
-                    <span className="text-[9px] text-red-600 font-bold leading-tight text-right w-11 truncate" title={dayObj.holidayName}>
-                      {dayObj.holidayName}
-                    </span>
-                  )}
-                  {!dayObj.isHoliday && isCurrent && getEventsForDate(dayObj.date.getMonth() + 1, dayObj.date.getDate(), dayObj.date.getFullYear()).includes('ゆめトクサンデー') && (
-                    <span className="text-[9px] text-orange-600 font-bold leading-tight text-right w-11 truncate">
-                      ゆめトク
-                    </span>
-                  )}
-                </div>
+                {(() => {
+                  const isYumeToku = !dayObj.isHoliday && isCurrent && getEventsForDate(dayObj.date.getMonth() + 1, dayObj.date.getDate(), dayObj.date.getFullYear()).includes('ゆめトクサンデー');
+                  const yumeTokuKey = `${dateKey}_yumeToku`;
+                  const yumeTokuValue = notes[yumeTokuKey] !== undefined ? notes[yumeTokuKey] : (isYumeToku ? 'ゆめトク' : '');
+                  return (
+                    <div className="flex justify-between items-start mb-1">
+                      <span className={`text-xs ${textClass}`}>
+                        {dayObj.date.getDate()}
+                      </span>
+                      {dayObj.isHoliday && (
+                        <span className="text-[9px] text-red-600 font-bold leading-tight text-right w-11 truncate" title={dayObj.holidayName}>
+                          {dayObj.holidayName}
+                        </span>
+                      )}
+                      {(isYumeToku || yumeTokuValue) && isCurrent && !dayObj.isHoliday && (
+                        <input
+                          type="text"
+                          value={yumeTokuValue}
+                          onChange={(e) => {
+                            if (e.target.value.length <= 10) {
+                              onNoteChange(yumeTokuKey, e.target.value);
+                            }
+                          }}
+                          className="text-[9px] text-orange-600 font-bold leading-tight text-right w-11 bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-orange-300 rounded px-0.5 cursor-text"
+                          maxLength={10}
+                        />
+                      )}
+                    </div>
+                  );
+                })()}
 
                 {isCurrent && (
                   <textarea
