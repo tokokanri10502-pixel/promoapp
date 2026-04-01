@@ -132,11 +132,11 @@ function MainApp() {
           <div className="flex items-center justify-center py-20 text-gray-400">データを読み込み中...</div>
         ) : (
           <>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6 print-layout-grid">
-              <div className="lg:col-span-2 print-col-main">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 print-layout-grid">
+              <div className="print-col-main">
                 <PromotionBody month={month} themeData={themeData} setThemeData={setThemeData} />
               </div>
-              <div className="lg:col-span-1 print-col-side">
+              <div className="print-col-side">
                 <MonthlyCalendar monthCalendar={monthCalendar} notes={calendarNotes} onNoteChange={updateCalendarNote} />
               </div>
             </div>
