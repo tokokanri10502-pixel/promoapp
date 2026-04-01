@@ -55,7 +55,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
             return (
               <div
                 key={index}
-                className={`min-h-[90px] h-[90px] border-r border-b border-gray-200 p-1 flex flex-col ${bgClass}`}
+                className={`min-h-[110px] h-[110px] border-r border-b border-gray-200 p-1 flex flex-col ${bgClass}`}
               >
                 {(() => {
                   const eventsForDay = isCurrent ? getEventsForDate(dayObj.date.getMonth() + 1, dayObj.date.getDate(), dayObj.date.getFullYear()) : [];
@@ -77,11 +77,11 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                   return (
                     <div className="mb-1">
                       <div className="flex items-center gap-1">
-                        <span className={`text-xs ${textClass}`}>
+                        <span className={`text-sm font-bold ${textClass}`}>
                           {dayObj.date.getDate()}
                         </span>
                         {dayObj.isHoliday && (
-                          <span className="text-[9px] text-red-600 font-bold leading-tight truncate" title={dayObj.holidayName}>
+                          <span className="text-[11px] text-red-600 font-bold leading-tight truncate" title={dayObj.holidayName}>
                             {dayObj.holidayName}
                           </span>
                         )}
@@ -93,7 +93,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                           onChange={(e) => {
                             if (e.target.value.length <= 12) onNoteChange(yumeTokuKey, e.target.value);
                           }}
-                          className="text-[9px] text-orange-600 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-orange-300 rounded px-0.5 cursor-text"
+                          className="text-[11px] text-orange-600 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-orange-300 rounded px-0.5 cursor-text"
                           maxLength={12}
                         />
                       )}
@@ -104,7 +104,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                           onChange={(e) => {
                             if (e.target.value.length <= 12) onNoteChange(clYumeKey, e.target.value);
                           }}
-                          className="text-[9px] text-purple-600 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-purple-300 rounded px-0.5 cursor-text"
+                          className="text-[11px] text-purple-600 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-purple-300 rounded px-0.5 cursor-text"
                           maxLength={12}
                         />
                       )}
@@ -115,7 +115,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                           onChange={(e) => {
                             if (e.target.value.length <= 12) onNoteChange(ichiKey, e.target.value);
                           }}
-                          className="text-[9px] text-green-700 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-green-300 rounded px-0.5 cursor-text"
+                          className="text-[11px] text-green-700 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-green-300 rounded px-0.5 cursor-text"
                           maxLength={12}
                         />
                       )}
@@ -126,7 +126,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                           onChange={(e) => {
                             if (e.target.value.length <= 12) onNoteChange(yume25Key, e.target.value);
                           }}
-                          className="text-[9px] text-pink-600 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-pink-300 rounded px-0.5 cursor-text"
+                          className="text-[11px] text-pink-600 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-pink-300 rounded px-0.5 cursor-text"
                           maxLength={12}
                         />
                       )}
@@ -137,7 +137,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                           onChange={(e) => {
                             if (e.target.value.length <= 12) onNoteChange(pensionKey, e.target.value);
                           }}
-                          className="text-[9px] text-teal-600 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-teal-300 rounded px-0.5 cursor-text"
+                          className="text-[11px] text-teal-600 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-teal-300 rounded px-0.5 cursor-text"
                           maxLength={12}
                         />
                       )}
@@ -154,7 +154,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                       }
                     }}
                     placeholder=""
-                    className="w-full flex-grow bg-transparent text-[10px] leading-tight resize-none outline-none focus:bg-primary-50 rounded p-0.5 border border-transparent hover:border-gray-200 focus:border-primary-300 placeholder-gray-300 overflow-hidden cursor-text"
+                    className="w-full flex-grow bg-transparent text-xs leading-tight resize-none outline-none focus:bg-primary-50 rounded p-0.5 border border-transparent hover:border-gray-200 focus:border-primary-300 placeholder-gray-300 overflow-hidden cursor-text"
                     maxLength={30}
                   />
                 )}
