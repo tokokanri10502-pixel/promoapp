@@ -98,6 +98,9 @@ export const getEventsForDate = (month, day, year) => {
   // 毎月15日 → 15市
   if (day === 15) events.push('15市');
 
+  // 毎月25日 → ゆめ25市
+  if (day === 25) events.push('ゆめ25市');
+
   if (year) {
     // 第1日曜日 → ゆめトクサンデー
     const firstDay = new Date(year, month - 1, 1);

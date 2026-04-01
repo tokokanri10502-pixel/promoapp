@@ -62,14 +62,17 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                   const isYumeToku = !dayObj.isHoliday && isCurrent && eventsForDay.includes('ゆめトクサンデー');
                   const isCLYume = !dayObj.isHoliday && isCurrent && eventsForDay.includes('CLゆめタウンデー');
                   const is15ichi = isCurrent && eventsForDay.includes('15市');
+                  const isYume25 = isCurrent && eventsForDay.includes('ゆめ25市');
                   const isPension = isCurrent && eventsForDay.includes('年金支給日');
                   const yumeTokuKey = `${dateKey}_yumeToku`;
                   const clYumeKey = `${dateKey}_clYume`;
                   const ichiKey = `${dateKey}_15ichi`;
+                  const yume25Key = `${dateKey}_yume25`;
                   const pensionKey = `${dateKey}_pension`;
                   const yumeTokuValue = notes[yumeTokuKey] !== undefined ? notes[yumeTokuKey] : (isYumeToku ? 'ゆめトクサンデー' : '');
                   const clYumeValue = notes[clYumeKey] !== undefined ? notes[clYumeKey] : (isCLYume ? 'CLゆめタウンデー' : '');
                   const ichiValue = notes[ichiKey] !== undefined ? notes[ichiKey] : (is15ichi ? '15市' : '');
+                  const yume25Value = notes[yume25Key] !== undefined ? notes[yume25Key] : (isYume25 ? 'ゆめ25市' : '');
                   const pensionValue = notes[pensionKey] !== undefined ? notes[pensionKey] : (isPension ? '年金支給日' : '');
                   return (
                     <div className="mb-1">
@@ -113,6 +116,17 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                             if (e.target.value.length <= 12) onNoteChange(ichiKey, e.target.value);
                           }}
                           className="text-[9px] text-green-700 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-green-300 rounded px-0.5 cursor-text"
+                          maxLength={12}
+                        />
+                      )}
+                      {(isYume25 || yume25Value) && isCurrent && (
+                        <input
+                          type="text"
+                          value={yume25Value}
+                          onChange={(e) => {
+                            if (e.target.value.length <= 12) onNoteChange(yume25Key, e.target.value);
+                          }}
+                          className="text-[9px] text-pink-600 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-pink-300 rounded px-0.5 cursor-text"
                           maxLength={12}
                         />
                       )}
