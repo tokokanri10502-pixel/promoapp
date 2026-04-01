@@ -1,4 +1,5 @@
 // src/data/mockData.js
+import JapaneseHolidays from 'japanese-holidays';
 
 // 二十四節気などの季節行事や、世間の行事（給料日など）のモックデータ定義
 export const seasonalEventsData = {
@@ -108,6 +109,15 @@ export const getEventsForDate = (month, day, year) => {
     const lastDay = new Date(year, month, 0);
     const lastSunday = lastDay.getDate() - lastDay.getDay();
     if (day === lastSunday) events.push('CLゆめタウンデー');
+
+    // 偶数月の年金支給日（原則15日、土日祝は直前の平日）
+    if (month % 2 === 0) {
+      let pensionDate = new Date(year, month - 1, 15);
+      while (pensionDate.getDay() === 0 || pensionDate.getDay() === 6 || JapaneseHolidays.isHoliday(pensionDate)) {
+        pensionDate.setDate(pensionDate.getDate() - 1);
+      }
+      if (day === pensionDate.getDate()) events.push('年金支給日');
+    }
   }
 
   return events;

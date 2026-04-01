@@ -62,12 +62,15 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                   const isYumeToku = !dayObj.isHoliday && isCurrent && eventsForDay.includes('ゆめトクサンデー');
                   const isCLYume = !dayObj.isHoliday && isCurrent && eventsForDay.includes('CLゆめタウンデー');
                   const is15ichi = isCurrent && eventsForDay.includes('15市');
+                  const isPension = isCurrent && eventsForDay.includes('年金支給日');
                   const yumeTokuKey = `${dateKey}_yumeToku`;
                   const clYumeKey = `${dateKey}_clYume`;
                   const ichiKey = `${dateKey}_15ichi`;
+                  const pensionKey = `${dateKey}_pension`;
                   const yumeTokuValue = notes[yumeTokuKey] !== undefined ? notes[yumeTokuKey] : (isYumeToku ? 'ゆめトクサンデー' : '');
                   const clYumeValue = notes[clYumeKey] !== undefined ? notes[clYumeKey] : (isCLYume ? 'CLゆめタウンデー' : '');
                   const ichiValue = notes[ichiKey] !== undefined ? notes[ichiKey] : (is15ichi ? '15市' : '');
+                  const pensionValue = notes[pensionKey] !== undefined ? notes[pensionKey] : (isPension ? '年金支給日' : '');
                   return (
                     <div className="mb-1">
                       <div className="flex items-center gap-1">
@@ -110,6 +113,17 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                             if (e.target.value.length <= 12) onNoteChange(ichiKey, e.target.value);
                           }}
                           className="text-[9px] text-green-700 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-green-300 rounded px-0.5 cursor-text"
+                          maxLength={12}
+                        />
+                      )}
+                      {(isPension || pensionValue) && isCurrent && (
+                        <input
+                          type="text"
+                          value={pensionValue}
+                          onChange={(e) => {
+                            if (e.target.value.length <= 12) onNoteChange(pensionKey, e.target.value);
+                          }}
+                          className="text-[9px] text-teal-600 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-teal-300 rounded px-0.5 cursor-text"
                           maxLength={12}
                         />
                       )}
