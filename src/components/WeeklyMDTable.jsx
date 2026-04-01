@@ -31,7 +31,8 @@ const WeeklyMDTable = ({ monthCalendar, plans, updatePlan }) => {
               const y = dayObj.date.getFullYear();
               const eventSet = new Set();
               if (dayObj.isHoliday) eventSet.add(dayObj.holidayName);
-              getEventsForDate(m, d, y).forEach(ev => eventSet.add(ev));
+              const excludeFromTable = ['ゆめトクサンデー', '15市', 'ゆめ25市', 'CLゆめタウンデー', '年金支給日'];
+              getEventsForDate(m, d, y).filter(ev => !excludeFromTable.includes(ev)).forEach(ev => eventSet.add(ev));
               return Array.from(eventSet).map(ev => `${m}/${d}(${dayObj.dayOfWeek}): ${ev}`);
             }).join('\n');
 
