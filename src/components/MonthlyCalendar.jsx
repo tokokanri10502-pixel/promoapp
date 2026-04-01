@@ -60,7 +60,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                 {(() => {
                   const isYumeToku = !dayObj.isHoliday && isCurrent && getEventsForDate(dayObj.date.getMonth() + 1, dayObj.date.getDate(), dayObj.date.getFullYear()).includes('ゆめトクサンデー');
                   const yumeTokuKey = `${dateKey}_yumeToku`;
-                  const yumeTokuValue = notes[yumeTokuKey] !== undefined ? notes[yumeTokuKey] : (isYumeToku ? 'ゆめトク' : '');
+                  const yumeTokuValue = notes[yumeTokuKey] !== undefined ? notes[yumeTokuKey] : (isYumeToku ? 'ゆめトクサンデー' : '');
                   return (
                     <div className="mb-1">
                       <div className="flex items-center gap-1">
