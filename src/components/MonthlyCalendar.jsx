@@ -62,15 +62,17 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                   const yumeTokuKey = `${dateKey}_yumeToku`;
                   const yumeTokuValue = notes[yumeTokuKey] !== undefined ? notes[yumeTokuKey] : (isYumeToku ? 'ゆめトク' : '');
                   return (
-                    <div className="flex justify-between items-start mb-1">
-                      <span className={`text-xs ${textClass}`}>
-                        {dayObj.date.getDate()}
-                      </span>
-                      {dayObj.isHoliday && (
-                        <span className="text-[9px] text-red-600 font-bold leading-tight text-right w-11 truncate" title={dayObj.holidayName}>
-                          {dayObj.holidayName}
+                    <div className="mb-1">
+                      <div className="flex items-center gap-1">
+                        <span className={`text-xs ${textClass}`}>
+                          {dayObj.date.getDate()}
                         </span>
-                      )}
+                        {dayObj.isHoliday && (
+                          <span className="text-[9px] text-red-600 font-bold leading-tight truncate" title={dayObj.holidayName}>
+                            {dayObj.holidayName}
+                          </span>
+                        )}
+                      </div>
                       {(isYumeToku || yumeTokuValue) && isCurrent && !dayObj.isHoliday && (
                         <input
                           type="text"
@@ -80,7 +82,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                               onNoteChange(yumeTokuKey, e.target.value);
                             }
                           }}
-                          className="text-[9px] text-orange-600 font-bold leading-tight text-right w-11 bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-orange-300 rounded px-0.5 cursor-text"
+                          className="text-[9px] text-orange-600 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-orange-300 rounded px-0.5 cursor-text"
                           maxLength={10}
                         />
                       )}
