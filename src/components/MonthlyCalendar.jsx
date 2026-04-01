@@ -12,7 +12,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6 print-break-inside-avoid">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden print-break-inside-avoid h-full">
       <div className="bg-primary-50 px-4 py-3 border-b border-gray-200">
         <h3 className="font-bold text-primary-800 text-lg flex items-center gap-2">
           📅 月間カレンダー
