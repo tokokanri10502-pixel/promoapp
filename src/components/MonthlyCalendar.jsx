@@ -58,9 +58,13 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                 className={`min-h-[90px] h-[90px] border-r border-b border-gray-200 p-1 flex flex-col ${bgClass}`}
               >
                 {(() => {
-                  const isYumeToku = !dayObj.isHoliday && isCurrent && getEventsForDate(dayObj.date.getMonth() + 1, dayObj.date.getDate(), dayObj.date.getFullYear()).includes('ゆめトクサンデー');
+                  const eventsForDay = isCurrent ? getEventsForDate(dayObj.date.getMonth() + 1, dayObj.date.getDate(), dayObj.date.getFullYear()) : [];
+                  const isYumeToku = !dayObj.isHoliday && isCurrent && eventsForDay.includes('ゆめトクサンデー');
+                  const isCLYume = !dayObj.isHoliday && isCurrent && eventsForDay.includes('CLゆめタウンデー');
                   const yumeTokuKey = `${dateKey}_yumeToku`;
+                  const clYumeKey = `${dateKey}_clYume`;
                   const yumeTokuValue = notes[yumeTokuKey] !== undefined ? notes[yumeTokuKey] : (isYumeToku ? 'ゆめトクサンデー' : '');
+                  const clYumeValue = notes[clYumeKey] !== undefined ? notes[clYumeKey] : (isCLYume ? 'CLゆめタウンデー' : '');
                   return (
                     <div className="mb-1">
                       <div className="flex items-center gap-1">
@@ -78,12 +82,21 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
                           type="text"
                           value={yumeTokuValue}
                           onChange={(e) => {
-                            if (e.target.value.length <= 10) {
-                              onNoteChange(yumeTokuKey, e.target.value);
-                            }
+                            if (e.target.value.length <= 12) onNoteChange(yumeTokuKey, e.target.value);
                           }}
                           className="text-[9px] text-orange-600 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-orange-300 rounded px-0.5 cursor-text"
-                          maxLength={10}
+                          maxLength={12}
+                        />
+                      )}
+                      {(isCLYume || clYumeValue) && isCurrent && !dayObj.isHoliday && (
+                        <input
+                          type="text"
+                          value={clYumeValue}
+                          onChange={(e) => {
+                            if (e.target.value.length <= 12) onNoteChange(clYumeKey, e.target.value);
+                          }}
+                          className="text-[9px] text-purple-600 font-bold leading-tight w-full bg-transparent outline-none border border-transparent hover:border-gray-200 focus:border-purple-300 rounded px-0.5 cursor-text"
+                          maxLength={12}
                         />
                       )}
                     </div>

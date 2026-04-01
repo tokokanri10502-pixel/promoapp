@@ -94,14 +94,17 @@ export const seasonalEventsData = {
 export const getEventsForDate = (month, day, year) => {
   const events = [...(seasonalEventsData[month]?.[day] || [])];
 
-  // 第1日曜日を計算してゆめトクサンデーを追加
   if (year) {
+    // 第1日曜日 → ゆめトクサンデー
     const firstDay = new Date(year, month - 1, 1);
     const firstSundayOffset = (7 - firstDay.getDay()) % 7;
     const firstSunday = 1 + firstSundayOffset;
-    if (day === firstSunday) {
-      events.push('ゆめトクサンデー');
-    }
+    if (day === firstSunday) events.push('ゆめトクサンデー');
+
+    // 最終日曜日 → CLゆめタウンデー
+    const lastDay = new Date(year, month, 0);
+    const lastSunday = lastDay.getDate() - lastDay.getDay();
+    if (day === lastSunday) events.push('CLゆめタウンデー');
   }
 
   return events;
