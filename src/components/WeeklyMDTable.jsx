@@ -10,12 +10,12 @@ const WeeklyMDTable = ({ monthCalendar, plans, updatePlan }) => {
         <thead className="bg-primary-50">
           <tr>
             <th className="w-16 px-2 py-3 text-center border-r border-gray-300 font-bold text-gray-700">週/期間</th>
-            <th className="w-32 px-2 py-3 text-left border-r border-gray-300 font-bold text-gray-700">暮らしの歳時記</th>
+            <th className="w-40 px-2 py-3 text-left border-r border-gray-300 font-bold text-gray-700">暮らしの歳時記</th>
             <th className="w-40 px-2 py-3 text-left border-r border-gray-300 font-bold text-gray-700">重点テーマ</th>
             <th className="w-96 px-2 py-3 text-center border-r border-gray-300 font-bold text-gray-700">
               生活行動とプロモーション
             </th>
-            <th className="w-48 px-2 py-3 text-left border-r border-gray-300 font-bold text-gray-700">昨年の販促施策</th>
+            <th className="w-40 px-2 py-3 text-left border-r border-gray-300 font-bold text-gray-700">昨年の販促施策</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-300 bg-white">
