@@ -57,14 +57,31 @@ body {
   .print-textarea { display: none !important; }
   .print-text { display: block !important; }
 
-  /* 印刷時：高さ制約を解除 */
+  /* 印刷時：重点テーマセクションの高さ制約を解除 */
   .print-col-main,
-  .print-col-main > *,
-  .print-col-main > * > *,
-  .print-col-main > * > * > *,
-  .print-col-main > * > * > * > * {
+  .print-col-main > * {
+    height: auto !important;
+    min-height: unset !important;
+  }
+
+  /* 印刷時：左右列を50%幅に固定 */
+  .promotion-col {
+    width: 50% !important;
+    flex: 0 0 50% !important;
+    height: auto !important;
+    min-height: unset !important;
+  }
+  .promotion-col > *,
+  .promotion-col > * > * {
     height: auto !important;
     min-height: unset !important;
     flex: none !important;
+  }
+
+  /* 印刷時：flex-rowレイアウトを維持 */
+  .print-col-main > * > div[class*="flex-col"][class*="md:flex-row"] {
+    display: flex !important;
+    flex-direction: row !important;
+    height: auto !important;
   }
 }

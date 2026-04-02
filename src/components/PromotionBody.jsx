@@ -26,7 +26,7 @@ const PromotionBody = ({ themeData, setThemeData }) => {
       </h2>
 
       <div className="flex flex-col md:flex-row gap-6 flex-1 min-h-0">
-        <div className="flex flex-col flex-1 gap-4">
+        <div className="promotion-col flex flex-col flex-1 gap-4">
           <div className="flex flex-col flex-1">
             <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
               <span className="text-primary-600 font-bold">●</span> 月間重点テーマ
@@ -55,7 +55,7 @@ const PromotionBody = ({ themeData, setThemeData }) => {
           </div>
         </div>
 
-        <div className="flex flex-col flex-1 gap-4">
+        <div className="promotion-col flex flex-col flex-1 gap-4">
           <div className="flex flex-col flex-1">
             <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
               <AlertCircle className="w-4 h-4 text-orange-500" /> 前年実績と反省点
