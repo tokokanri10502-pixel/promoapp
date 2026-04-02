@@ -16,7 +16,6 @@ const WeeklyMDTable = ({ monthCalendar, plans, updatePlan }) => {
               生活行動とプロモーション
             </th>
             <th className="w-48 px-2 py-3 text-left border-r border-gray-300 font-bold text-gray-700">昨年の販促施策</th>
-            <th className="w-40 px-2 py-3 text-left font-bold text-gray-700">個店対応・重点店舗差替え</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-300 bg-white">
@@ -83,14 +82,6 @@ const WeeklyMDTable = ({ monthCalendar, plans, updatePlan }) => {
                   />
                 </td>
 
-                {/* 独自施策 */}
-                <td className="p-1 align-top">
-                  <EditableCell
-                    value={weekPlan.custom || ''}
-                    onChange={(val) => updatePlan(weekKey, 'custom', val)}
-                    placeholder="個店ごとの施策や差替え"
-                  />
-                </td>
               </tr>
             );
           })}
