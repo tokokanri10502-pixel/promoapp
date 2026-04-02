@@ -46,4 +46,18 @@ body {
   .print-layout-grid > .print-col-side {
     width: 100% !important;
   }
+
+  /* 印刷時：テキストエリアの内容をすべて表示 */
+  .print-col-main textarea {
+    height: auto !important;
+    min-height: unset !important;
+    overflow: visible !important;
+    flex: none !important;
+  }
+  .print-col-main,
+  .print-col-main > *,
+  .print-col-main > * > * {
+    height: auto !important;
+    min-height: unset !important;
+  }
 }
