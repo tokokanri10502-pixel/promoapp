@@ -38,6 +38,9 @@ body {
   .print-break-after-page {
     break-after: page;
   }
+  .print-break-before-page {
+    break-before: page;
+  }
   /* 印刷時：タイトル＋重点テーマを1ページ目に収める */
   .print-layout-grid {
     display: block !important;

@@ -141,7 +141,7 @@ function MainApp() {
               </div>
             </div>
 
-            <div className="mb-6">
+            <div className="mb-6 print-break-before-page">
               <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 mb-3">
                 <span className="bg-primary-500 text-white w-6 h-6 rounded flex items-center justify-center text-sm">📋</span>
                 週別MD・販促詳細計画
