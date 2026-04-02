@@ -33,7 +33,7 @@ const PromotionBody = ({ themeData, setThemeData }) => {
           </div>
           <div className="flex flex-col flex-1">
             <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
-              <TrendingUp className="w-4 h-4 text-gray-500" /> 消費者トレンド・世相
+              <TrendingUp className="w-4 h-4 text-gray-500" /> 月間トピックス
             </label>
             <textarea
               name="trends"
