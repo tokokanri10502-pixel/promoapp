@@ -17,6 +17,9 @@ body {
   color: #1f2937;
 }
 
+/* 印刷専用テキスト（画面では非表示） */
+.print-text { display: none; }
+
 /* 印刷用スタイル */
 @media print {
   @page {
@@ -47,17 +50,18 @@ body {
     width: 100% !important;
   }
 
-  /* 印刷時：テキストエリアの内容をすべて表示 */
-  .print-col-main textarea {
-    height: auto !important;
-    min-height: unset !important;
-    overflow: visible !important;
-    flex: none !important;
-  }
+  /* 印刷時：textareaを非表示、print-text divを表示 */
+  .print-textarea { display: none !important; }
+  .print-text { display: block !important; }
+
+  /* 印刷時：高さ制約を解除 */
   .print-col-main,
   .print-col-main > *,
-  .print-col-main > * > * {
+  .print-col-main > * > *,
+  .print-col-main > * > * > *,
+  .print-col-main > * > * > * > * {
     height: auto !important;
     min-height: unset !important;
+    flex: none !important;
   }
 }

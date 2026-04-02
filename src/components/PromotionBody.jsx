@@ -1,6 +1,14 @@
 import React from 'react';
 import { Target, TrendingUp, AlertCircle, FileText } from 'lucide-react';
 
+const PrintField = ({ value, placeholder }) => (
+  <>
+    <div className="print-text w-full text-sm py-2 px-3 border border-gray-300 rounded-md whitespace-pre-wrap min-h-[40px]">
+      {value || <span className="text-gray-400">{placeholder}</span>}
+    </div>
+  </>
+);
+
 const PromotionBody = ({ themeData, setThemeData }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,9 +35,10 @@ const PromotionBody = ({ themeData, setThemeData }) => {
               name="mainTheme"
               value={themeData.mainTheme || ''}
               onChange={handleChange}
-              className="w-full flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 min-h-[100px] resize-none"
+              className="print-textarea w-full flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 min-h-[100px] resize-none"
               placeholder="例: 「春の旬彩」 地場野菜と新生活応援フェア"
             />
+            <PrintField value={themeData.mainTheme} placeholder="例: 「春の旬彩」 地場野菜と新生活応援フェア" />
           </div>
           <div className="flex flex-col flex-1">
             <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
@@ -39,9 +48,10 @@ const PromotionBody = ({ themeData, setThemeData }) => {
               name="trends"
               value={themeData.trends || ''}
               onChange={handleChange}
-              className="w-full flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500 min-h-[100px] resize-none"
+              className="print-textarea w-full flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500 min-h-[100px] resize-none"
               placeholder="例: 物価高騰による節約志向、時短・簡便惣菜の需要増加"
             />
+            <PrintField value={themeData.trends} placeholder="例: 物価高騰による節約志向、時短・簡便惣菜の需要増加" />
           </div>
         </div>
 
@@ -54,9 +64,10 @@ const PromotionBody = ({ themeData, setThemeData }) => {
               name="lastYearRef"
               value={themeData.lastYearRef || ''}
               onChange={handleChange}
-              className="w-full flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 min-h-[100px] resize-none"
+              className="print-textarea w-full flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 min-h-[100px] resize-none"
               placeholder="例: 前年は週末に雨天が多く客数減。生鮮の夕方見切りが遅れた反省あり。"
             />
+            <PrintField value={themeData.lastYearRef} placeholder="例: 前年は週末に雨天が多く客数減。生鮮の夕方見切りが遅れた反省あり。" />
           </div>
           <div className="flex flex-col flex-1">
             <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
@@ -66,9 +77,10 @@ const PromotionBody = ({ themeData, setThemeData }) => {
               name="notes"
               value={themeData.notes || ''}
               onChange={handleChange}
-              className="w-full flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-h-[100px] resize-none"
+              className="print-textarea w-full flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-h-[100px] resize-none"
               placeholder="例: FIFAワールドカップ2026開催に伴う、おつまみ・飲料の需要増。"
             />
+            <PrintField value={themeData.notes} placeholder="例: FIFAワールドカップ2026開催に伴う、おつまみ・飲料の需要増。" />
           </div>
         </div>
       </div>
