@@ -28,7 +28,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
           ))}
         </div>
 
-        <div className="grid grid-cols-7 gap-1 border-t border-l border-gray-200">
+        <div className={`grid grid-cols-7 gap-1 border-t border-l border-gray-200${monthCalendar.length >= 6 ? ' calendar-6rows' : ''}`}>
           {allDays.map((dayObj, index) => {
             const isWeekend = dayObj.isWeekend;
             const isCurrent = dayObj.isCurrentMonth;
@@ -55,7 +55,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
             return (
               <div
                 key={index}
-                className={`min-h-[110px] h-[110px] border-r border-b border-gray-200 p-1 flex flex-col ${bgClass}`}
+                className={`calendar-cell min-h-[110px] h-[110px] border-r border-b border-gray-200 p-1 flex flex-col ${bgClass}`}
               >
                 {(() => {
                   const eventsForDay = isCurrent ? getEventsForDate(dayObj.date.getMonth() + 1, dayObj.date.getDate(), dayObj.date.getFullYear()) : [];

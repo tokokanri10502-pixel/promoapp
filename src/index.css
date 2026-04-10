@@ -85,6 +85,19 @@ body {
     height: auto !important;
   }
 
+  /* 印刷時：6週月のカレンダーセルを縮小（画面表示は変えない） */
+  .calendar-6rows .calendar-cell {
+    height: 85px !important;
+    min-height: 85px !important;
+  }
+  .calendar-6rows .calendar-cell * {
+    font-size: 8px !important;
+    line-height: 1.2 !important;
+  }
+  .calendar-6rows .calendar-cell .text-sm {
+    font-size: 9px !important;
+  }
+
   /* 印刷時：週別MDテーブルを1ページに収める */
   table {
     font-size: 9px !important;
