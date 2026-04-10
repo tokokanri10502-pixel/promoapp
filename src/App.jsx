@@ -101,7 +101,7 @@ function MainApp() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans print:bg-white pb-20">
+    <div className="min-h-screen print:min-h-0 bg-gray-50 font-sans print:bg-white pb-20 print:pb-0">
       <Header year={year} month={month} setYear={handleYearChange} setMonth={handleMonthChange} />
 
       <main id="pdf-export-content" className="w-full px-2 sm:px-6 lg:px-8 py-6 max-w-[1600px] mx-auto print:p-0 print:max-w-none bg-white">
