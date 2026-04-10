@@ -6,6 +6,8 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
 
   // 全ての日付をフラットな配列にする
   const allDays = monthCalendar.flatMap(week => week.days);
+  // 表示行数（7列グリッドの行数）が6以上なら6週月
+  const rowCount = Math.ceil(allDays.length / 7);
 
   const getDateKey = (date) => {
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
@@ -28,7 +30,7 @@ const MonthlyCalendar = ({ monthCalendar, notes = {}, onNoteChange }) => {
           ))}
         </div>
 
-        <div className={`grid grid-cols-7 gap-1 border-t border-l border-gray-200${monthCalendar.length >= 6 ? ' calendar-6rows' : ''}`}>
+        <div className={`grid grid-cols-7 gap-1 border-t border-l border-gray-200${rowCount >= 6 ? ' calendar-6rows' : ''}`}>
           {allDays.map((dayObj, index) => {
             const isWeekend = dayObj.isWeekend;
             const isCurrent = dayObj.isCurrentMonth;
