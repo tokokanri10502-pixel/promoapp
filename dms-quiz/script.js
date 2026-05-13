@@ -914,7 +914,7 @@ function showResult() {
             ${chapterHtml}
             <div id="send-status" class="send-status">📤 結果を送信中...</div>
             <div id="csv-fallback-area"></div>
-            <button onclick="restartQuiz()" class="restart-btn">トップへ戻る（別バージョンも受験できます）</button>
+            <button onclick="restartQuiz()" class="restart-btn">トップへ戻る（別バージョンにもチャレンジできます）</button>
         </div>`;
 
     const progressContainer = document.querySelector('.progress-container');
