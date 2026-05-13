@@ -388,6 +388,84 @@ h1 {
     padding-top: 1rem;
 }
 
+/* ===== トップページ - バージョン選択 ===== */
+.version-section {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.version-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+}
+
+.version-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.version-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    border: 2px solid var(--border-color);
+    padding: 1.25rem 0.75rem;
+    border-radius: 4px;
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    text-align: center;
+    gap: 0.4rem;
+}
+
+.version-btn:hover {
+    border-color: var(--accent-color);
+    background-color: var(--accent-light);
+    transform: translateY(-2px);
+}
+
+.version-btn:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.version-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+.version-desc {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.35;
+}
+
+.version-desc small {
+    display: block;
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+}
+
+@media (max-width: 480px) {
+    .version-buttons { grid-template-columns: 1fr; }
+}
+
 /* ===== 結果画面 - ユーザー情報 ===== */
 .user-info-display {
     color: var(--text-muted);

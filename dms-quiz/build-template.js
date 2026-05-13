@@ -24,71 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         chapterStats[q.chapter].total++;
     });
-    renderStartScreen();
-});
 
-// ========== 開始画面 ==========
-function renderStartScreen() {
+    // localStorage から名前・部署を読む。無ければ top.html にリダイレクト
     const saved = JSON.parse(localStorage.getItem('dms_quiz_user') || '{}');
-    const container = document.getElementById('quiz-container');
-    const progressContainer = document.querySelector('.progress-container');
-    if (progressContainer) progressContainer.style.display = 'none';
-    container.innerHTML = \`
-        <div class="start-card fade-in">
-            <h2 class="start-title">クイズを始める前に</h2>
-            <p class="start-subtitle">結果は集計のため管理者に送信されます。</p>
-            <div class="start-form">
-                <label class="start-label">
-                    お名前 <span class="required">*</span>
-                    <input type="text" id="user-name" class="start-input" placeholder="例: 山田 太郎" value="\${escapeHtml(saved.name || '')}" maxlength="50" />
-                </label>
-                <label class="start-label">
-                    部署 <span class="required">*</span>
-                    <input type="text" id="user-department" class="start-input" placeholder="例: 営業部" value="\${escapeHtml(saved.department || '')}" maxlength="50" />
-                </label>
-                <div id="start-error" class="start-error"></div>
-                <button id="start-btn" class="start-btn">クイズを開始</button>
-            </div>
-            <div class="start-meta">バージョン: \${QUIZ_VERSION} ・ 全 \${QUIZ_DATA.length} 問</div>
-        </div>
-    \`;
-    document.getElementById('start-btn').addEventListener('click', handleStart);
-    document.getElementById('user-name').focus();
-    // Enter で次の入力 or 開始
-    document.getElementById('user-name').addEventListener('keydown', e => {
-        if (e.key === 'Enter') document.getElementById('user-department').focus();
-    });
-    document.getElementById('user-department').addEventListener('keydown', e => {
-        if (e.key === 'Enter') handleStart();
-    });
-}
-
-function handleStart() {
-    const name = document.getElementById('user-name').value.trim();
-    const dept = document.getElementById('user-department').value.trim();
-    const errEl = document.getElementById('start-error');
-    if (!name || !dept) {
-        errEl.textContent = 'お名前と部署を入力してください。';
+    if (!saved.name || !saved.department) {
+        window.location.href = 'top.html';
         return;
     }
-    userInfo.name = name;
-    userInfo.department = dept;
-    localStorage.setItem('dms_quiz_user', JSON.stringify(userInfo));
 
-    // クイズ状態リセット
-    currentQuestionIndex = 0;
-    failCount = 0;
-    correctCount = 0;
-    questionLog = [];
-    Object.keys(chapterStats).forEach(c => chapterStats[c].correct = 0);
+    userInfo.name = saved.name;
+    userInfo.department = saved.department;
     startedAt = new Date();
-
-    // プログレスバーを表示
-    const progressContainer = document.querySelector('.progress-container');
-    if (progressContainer) progressContainer.style.display = '';
-
     renderQuestion(0);
-}
+});
 
 // ========== クイズ進行 ==========
 function renderQuestion(index) {
@@ -318,7 +266,7 @@ function showResult() {
             \${chapterHtml}
             <div id="send-status" class="send-status">📤 結果を送信中...</div>
             <div id="csv-fallback-area"></div>
-            <button onclick="restartQuiz()" class="restart-btn">最初からやり直す</button>
+            <button onclick="restartQuiz()" class="restart-btn">トップへ戻る（別バージョンも受験できます）</button>
         </div>\`;
 
     const progressContainer = document.querySelector('.progress-container');
@@ -329,7 +277,8 @@ function showResult() {
 }
 
 function restartQuiz() {
-    renderStartScreen();
+    // トップページに戻る（名前・部署はlocalStorageに残っているので再入力不要）
+    window.location.href = 'top.html';
 }
 
 // ========== 送信処理 ==========

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMS IT基礎用語 問題集</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-inner">
+            <h1>DMS IT基礎用語 問題集</h1>
+            <p class="subtitle"><span class="eyecatch-badge">v1 と v2 の2バージョン</span> 両方受験してください。</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="start-card fade-in">
+            <h2 class="start-title">お名前と部署を入力してください</h2>
+            <p class="start-subtitle">結果は集計のため管理者に送信されます。</p>
+            <div class="start-form">
+                <label class="start-label">
+                    お名前 <span class="required">*</span>
+                    <input type="text" id="user-name" class="start-input" placeholder="例: 山田 太郎" maxlength="50" autocomplete="name" />
+                </label>
+                <label class="start-label">
+                    部署 <span class="required">*</span>
+                    <input type="text" id="user-department" class="start-input" placeholder="例: 営業部" maxlength="50" autocomplete="organization" />
+                </label>
+                <div id="start-error" class="start-error"></div>
+            </div>
+
+            <div class="version-section">
+                <h3 class="version-heading">受験するバージョンを選択</h3>
+                <div class="version-buttons">
+                    <button class="version-btn version-btn-v1" data-target="index.html">
+                        <span class="version-label">v1</span>
+                        <span class="version-desc">基礎編<br><small>IT基礎・Web制作・広告・ビジネス・生成AI</small></span>
+                    </button>
+                    <button class="version-btn version-btn-v2" data-target="index-v2.html">
+                        <span class="version-label">v2</span>
+                        <span class="version-desc">応用編<br><small>同じ5章のテーマで別問題</small></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="start-meta">
+                各バージョン 50問・約10分／採点: 1回目正解=1点、2回目正解=0.5点
+            </div>
+        </div>
+    </main>
+
+    <script src="top.js"></script>
+</body>
+
+</html>
