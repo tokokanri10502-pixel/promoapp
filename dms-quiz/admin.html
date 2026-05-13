@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>DMS Quiz 管理コンソール</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-inner">
+            <h1>DMS Quiz 管理コンソール</h1>
+            <p class="subtitle">管理者専用ページ</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 認証画面 -->
+        <div id="auth-section" class="quiz-card fade-in">
+            <h2 class="start-title">合言葉を入力してください</h2>
+            <p class="start-subtitle">管理者から共有された合言葉を入力してください。</p>
+            <div class="start-form">
+                <label class="start-label">
+                    合言葉 <span class="required">*</span>
+                    <input type="password" id="admin-pw" class="start-input" placeholder="••••••••" autocomplete="off" />
+                </label>
+                <div id="auth-error" class="start-error"></div>
+                <button id="auth-btn" class="start-btn">確認</button>
+            </div>
+        </div>
+
+        <!-- 管理画面 -->
+        <div id="admin-section" class="quiz-card fade-in" style="display:none">
+            <h2 class="start-title">管理メニュー</h2>
+            <p class="start-subtitle">ボタンを押すと Apps Script が裏で実行され、スプレッドシートに反映されます。</p>
+
+            <div class="admin-actions">
+                <button class="admin-btn admin-btn-primary" data-action="generateReport">
+                    <span class="admin-btn-emoji">📊</span>
+                    <span class="admin-btn-text">
+                        <strong>報告書（report シート）を生成</strong>
+                        <small>経営層向け PDF 出力用の整形シートを作成</small>
+                    </span>
+                </button>
+
+                <button class="admin-btn" data-action="setupAnalysisSheets">
+                    <span class="admin-btn-emoji">🔄</span>
+                    <span class="admin-btn-text">
+                        <strong>分析シートを再生成</strong>
+                        <small>dashboard / by_question / by_user / by_department / v3_candidates を再構築</small>
+                    </span>
+                </button>
+            </div>
+
+            <div id="admin-status" class="admin-status"></div>
+
+            <div class="admin-links">
+                <a href="data.html" target="_blank">📈 分析ダッシュボードを開く</a>
+                <a href="top.html" target="_blank">🎯 クイズトップを開く</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>
