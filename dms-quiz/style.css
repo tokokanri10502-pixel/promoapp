@@ -379,3 +379,58 @@ h1 {
         font-size: 1rem;
     }
 }
+
+/* ===== v2: 解説表示UI ===== */
+.result-label {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.explanation-box {
+    background-color: var(--accent-light, #eff6ff);
+    border-left: 3px solid var(--accent-color, #2563eb);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0 1.5rem;
+    border-radius: 0 4px 4px 0;
+    text-align: left;
+}
+
+.explanation-title {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-color, #2563eb);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+}
+
+.explanation-text {
+    color: var(--text-main);
+    font-size: 0.98rem;
+    font-weight: 400;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.next-btn {
+    background-color: var(--text-main);
+    color: white;
+    border: none;
+    padding: 0.85rem 2.25rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.15s;
+    letter-spacing: 0.03em;
+    font-family: 'Noto Sans JP', sans-serif;
+    margin-top: 0.5rem;
+}
+
+.next-btn:hover {
+    background-color: #333;
+    transform: translateY(-1px);
+}
+}
