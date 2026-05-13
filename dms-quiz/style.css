@@ -479,6 +479,29 @@ h1 {
     .version-buttons { grid-template-columns: 1fr; }
 }
 
+/* ===== v2 専用テーマ（緑系） ===== */
+/* index-v2.html の <body class="v2-theme"> に適用される */
+body.v2-theme {
+    --accent-color: #059669;       /* emerald-600 */
+    --accent-light: #d1fae5;       /* emerald-100 */
+}
+
+/* トップページの v2 ボタンも緑色で差別化 */
+.version-btn-v2 .version-label {
+    color: #059669;
+}
+
+.version-btn-v2:hover {
+    border-color: #059669;
+    background-color: #d1fae5;
+}
+
+.version-btn-v2:focus {
+    outline: none;
+    border-color: #059669;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.25);
+}
+
 /* ===== 結果画面 - ユーザー情報 ===== */
 .user-info-display {
     color: var(--text-muted);
