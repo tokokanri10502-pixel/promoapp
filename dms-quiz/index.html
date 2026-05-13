@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMS IT基礎用語 問題集</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="main-header">
+        <h1>DMS IT基礎用語 問題集</h1>
+        <p class="subtitle"><span class="eyecatch-badge">全50問</span> １から４のうち正しいものを一つ選んでください。</p>
+    </header>
+
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div id="progress-bar-fill" class="progress-fill"></div>
+        </div>
+        <div id="progress-text" class="progress-text">第 1 問 / 全 50 問</div>
+    </div>
+
+    <main id="quiz-container" class="container">
+        <!-- クイズカードがここにJavaScriptで生成されます -->
+    </main>
+
+    <!-- マルバツ表示用のオーバーレイ -->
+    <div id="overlay" class="overlay">
+        <div id="circle-mark" class="mark circle">〇</div>
+        <div id="cross-mark" class="mark cross">×</div>
+    </div>
+
+    <script src="script.js?v=2"></script>
+</body>
+
+</html>
