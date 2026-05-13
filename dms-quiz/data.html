@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="0; url=https://docs.google.com/spreadsheets/d/1GKoxtXr55qVbZT73G5ItfNNI0xVrStlBtNdCzx04gO0/edit">
+<title>DMS Quiz 分析結果へ移動中…</title>
+<style>
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #f5f4f0;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem;
+    text-align: center;
+}
+.box {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid #e0ddd6;
+    max-width: 420px;
+}
+h1 { font-size: 1.2rem; margin: 0 0 0.5rem; }
+p { color: #666; line-height: 1.6; margin: 0.5rem 0; }
+a { color: #2563eb; text-decoration: none; font-weight: bold; }
+a:hover { text-decoration: underline; }
+.spinner {
+    width: 32px; height: 32px; margin: 1rem auto;
+    border: 3px solid #e0ddd6; border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div class="box">
+    <h1>DMS Quiz 分析結果</h1>
+    <div class="spinner"></div>
+    <p>スプレッドシートへ移動中です…</p>
+    <p>自動でジャンプしない場合は<br><a href="https://docs.google.com/spreadsheets/d/1GKoxtXr55qVbZT73G5ItfNNI0xVrStlBtNdCzx04gO0/edit">こちらをクリック</a></p>
+</div>
+<script>
+// meta refresh のバックアップとして JS でも転送
+setTimeout(() => {
+    window.location.replace('https://docs.google.com/spreadsheets/d/1GKoxtXr55qVbZT73G5ItfNNI0xVrStlBtNdCzx04gO0/edit');
+}, 100);
+</script>
+</body>
+</html>
