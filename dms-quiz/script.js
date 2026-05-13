@@ -1,4 +1,4 @@
-// DMS 問題集データ (自動生成)
+// DMS 問題集データ (自動生成) - 解説表示UI付き
 const QUIZ_DATA = [
   {
     "chapter": "第1章：ITインフラ・基礎知識編（デジタルの土台）",
@@ -10,19 +10,21 @@ const QUIZ_DATA = [
       "DNSルーティング",
       "FTP転送"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "個人情報やパスワードを安全に送受信するための必須技術です。"
   },
   {
     "chapter": "第1章：ITインフラ・基礎知識編（デジタルの土台）",
     "id": "Q2",
     "text": "複数のシステムを、1つのIDとパスワードでログインして利用できる仕組みは？",
     "options": [
-      "VPN",
-      "二段階認証",
-      "エンドツーエンド暗号化",
+      "VPN（仮想専用線）",
+      "二段階認証（2FA）",
+      "エンドツーエンド暗号化（E2EE）",
       "シングルサインオン（SSO）"
     ],
-    "answerIndex": 3
+    "answerIndex": 3,
+    "explanation": "利便性とセキュリティを両立させる仕組みで、社内システムなどで導入が進んでいます。"
   },
   {
     "chapter": "第1章：ITインフラ・基礎知識編（デジタルの土台）",
@@ -34,7 +36,8 @@ const QUIZ_DATA = [
       "フラットデザイン",
       "アクセシビリティ"
     ],
-    "answerIndex": 0
+    "answerIndex": 0,
+    "explanation": "デバイスごとに別々のサイトを作らず、一つのサイトで表示を切り替えます。"
   },
   {
     "chapter": "第1章：ITインフラ・基礎知識編（デジタルの土台）",
@@ -46,7 +49,8 @@ const QUIZ_DATA = [
       "ドメイン名",
       "サブネットマスク"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "通信を行う全ての機器が持つ一意の番号です。"
   },
   {
     "chapter": "第1章：ITインフラ・基礎知識編（デジタルの土台）",
@@ -58,7 +62,8 @@ const QUIZ_DATA = [
       "キャッシュ",
       "バックアップ"
     ],
-    "answerIndex": 2
+    "answerIndex": 2,
+    "explanation": "2回目以降の表示を早めますが、古い情報が残ってしまう原因にもなります。"
   },
   {
     "chapter": "第1章：ITインフラ・基礎知識編（デジタルの土台）",
@@ -70,31 +75,34 @@ const QUIZ_DATA = [
       "DNS",
       "LAN"
     ],
-    "answerIndex": 0
+    "answerIndex": 0,
+    "explanation": "公衆回線の中に専用の「トンネル」を作るイメージで通信を保護します。"
   },
   {
     "chapter": "第1章：ITインフラ・基礎知識編（デジタルの土台）",
     "id": "Q7",
     "text": "パソコンやスマホの土台となる「基本ソフトウェア（WindowsやiOSなど）」の総称は？",
     "options": [
-      "ブラウザ",
-      "ミドルウェア",
-      "アンチウイルス",
+      "ブラウザ（Web閲覧ソフト）",
+      "ミドルウェア（OSとアプリの中間層）",
+      "アンチウイルス（ウイルス対策ソフト）",
       "OS（オペレーティングシステム）"
     ],
-    "answerIndex": 3
+    "answerIndex": 3,
+    "explanation": "あらゆるアプリケーションを動かすための最も基礎となるソフトです。"
   },
   {
     "chapter": "第1章：ITインフラ・基礎知識編（デジタルの土台）",
     "id": "Q8",
     "text": "ブラウザ等に後から便利な機能を追加するための小さなプログラムの総称は？",
     "options": [
-      "ドライバ",
-      "パッチ",
+      "ドライバ（機器制御ソフト）",
+      "パッチ（修正プログラム）",
       "プラグイン（拡張機能）",
-      "ファームウェア"
+      "ファームウェア（機器内蔵プログラム）"
     ],
-    "answerIndex": 2
+    "answerIndex": 2,
+    "explanation": "自分の使い勝手に合わせてツールをカスタマイズできます。"
   },
   {
     "chapter": "第1章：ITインフラ・基礎知識編（デジタルの土台）",
@@ -102,11 +110,12 @@ const QUIZ_DATA = [
     "text": "ネット経由でソフトウェアの機能を月額課金などで利用する形態（Zoom等）は？",
     "options": [
       "SaaS（サース）",
-      "オンプレミス",
-      "ローカルホスト",
-      "イントラネット"
+      "オンプレミス（自社運用）",
+      "ローカルホスト（自端末内）",
+      "イントラネット（社内ネット）"
     ],
-    "answerIndex": 0
+    "answerIndex": 0,
+    "explanation": "ソフトウェアを「購入」するのではなく「利用」する、現在の主流です。"
   },
   {
     "chapter": "第1章：ITインフラ・基礎知識編（デジタルの土台）",
@@ -118,7 +127,8 @@ const QUIZ_DATA = [
       "トラッキング",
       "マルウェア"
     ],
-    "answerIndex": 3
+    "answerIndex": 3,
+    "explanation": "コンピュータウイルスやスパイウェアなどの総称です。"
   },
   {
     "chapter": "第2章：Web制作・マーケティング編（現場で使う用語）",
@@ -130,19 +140,21 @@ const QUIZ_DATA = [
       "ワイヤーフレーム",
       "サイトマップ"
     ],
-    "answerIndex": 2
+    "answerIndex": 2,
+    "explanation": "色や写真を省き、要素の配置と機能だけを示す簡易図。デザイン作業前の認識合わせに使います。"
   },
   {
     "chapter": "第2章：Web制作・マーケティング編（現場で使う用語）",
     "id": "Q12",
     "text": "専門知識がなくても、管理画面からテキストを登録してWebサイトを更新できるシステムは？",
     "options": [
-      "CRM",
-      "MA",
-      "SFA",
+      "CRM（顧客管理システム）",
+      "MA（マーケティング自動化）",
+      "SFA（営業支援システム）",
       "CMS（コンテンツ管理システム）"
     ],
-    "answerIndex": 3
+    "answerIndex": 3,
+    "explanation": "WordPressが代表例。専門知識なしで更新できるため、企業サイトやブログで広く使われています。"
   },
   {
     "chapter": "第2章：Web制作・マーケティング編（現場で使う用語）",
@@ -154,31 +166,34 @@ const QUIZ_DATA = [
       "CX（カスタマーエクスペリエンス）",
       "DX（デジタルトランスフォーメーション）"
     ],
-    "answerIndex": 0
+    "answerIndex": 0,
+    "explanation": "ユーザーが直接触れる「見た目」と「操作性」の総称。直感的で迷わない設計が良いUIです。"
   },
   {
     "chapter": "第2章：Web制作・マーケティング編（現場で使う用語）",
     "id": "Q14",
     "text": "ユーザーがサービスを利用して得られる「体験や満足度」の総称は？",
     "options": [
-      "UI",
-      "PV",
-      "CV",
+      "UI（ユーザーインターフェース）",
+      "PV（ページビュー）",
+      "CV（コンバージョン）",
       "UX（ユーザーエクスペリエンス）"
     ],
-    "answerIndex": 3
+    "answerIndex": 3,
+    "explanation": "サイト訪問前から利用後まで含む「体験全体」。UIはUXの一部分にあたります。"
   },
   {
     "chapter": "第2章：Web制作・マーケティング編（現場で使う用語）",
     "id": "Q15",
     "text": "ユーザーの入力内容や訪問履歴を、ブラウザに一時的に保存させる仕組み（ファイル）は？",
     "options": [
-      "セッション",
+      "セッション（接続単位）",
       "Cookie（クッキー）",
-      "キャッシュ",
-      "トークン"
+      "キャッシュ（一時保存）",
+      "トークン（認証情報）"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "ログイン状態保持や閲覧履歴記録に使用。近年プライバシー規制（GDPR等）の対象です。"
   },
   {
     "chapter": "第2章：Web制作・マーケティング編（現場で使う用語）",
@@ -190,43 +205,47 @@ const QUIZ_DATA = [
       "PHP",
       "SQL"
     ],
-    "answerIndex": 0
+    "answerIndex": 0,
+    "explanation": "文字色・サイズ・余白・配置などを指定する言語。HTMLが「骨組み」ならCSSは「服装」です。"
   },
   {
     "chapter": "第2章：Web制作・マーケティング編（現場で使う用語）",
     "id": "Q17",
     "text": "広告のリンク先となるページ（LP）を改善し、お問い合わせ率を高める施策は？",
     "options": [
-      "SEO",
-      "EFO",
+      "SEO（検索エンジン最適化）",
+      "EFO（入力フォーム最適化）",
       "LPO（ランディングページ最適化）",
-      "CRO"
+      "CRO（コンバージョン率最適化）"
     ],
-    "answerIndex": 2
+    "answerIndex": 2,
+    "explanation": "見出し・CTA・フォームの改善などで、LPの離脱率改善やCV率向上を目指します。"
   },
   {
     "chapter": "第2章：Web制作・マーケティング編（現場で使う用語）",
     "id": "Q18",
     "text": "商品購入や問い合わせなど、Webサイトにおける「最終的な成果」を指す言葉は？",
     "options": [
-      "インプレッション",
-      "クリック",
+      "インプレッション（表示回数）",
+      "クリック（押下数）",
       "コンバージョン（CV）",
-      "リーチ"
+      "リーチ（到達人数）"
     ],
-    "answerIndex": 2
+    "answerIndex": 2,
+    "explanation": "サイト目的に応じた成果（購入・登録・問い合わせなど）。広告効果測定の最重要指標です。"
   },
   {
     "chapter": "第2章：Web制作・マーケティング編（現場で使う用語）",
     "id": "Q19",
     "text": "1つの商品を売ることに特化した、縦長のWebサイトを何と呼ぶか？",
     "options": [
-      "コーポレートサイト",
+      "コーポレートサイト（企業サイト）",
       "LP（ランディングページ）",
-      "ポータルサイト",
-      "ECサイト"
+      "ポータルサイト（玄関口サイト）",
+      "ECサイト（通販サイト）"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "1商品・1サービスに絞った縦長の専用ページ。広告のクリック先として使われます。"
   },
   {
     "chapter": "第2章：Web制作・マーケティング編（現場で使う用語）",
@@ -234,23 +253,25 @@ const QUIZ_DATA = [
     "text": "検索結果で自社サイトを上位（目立つ場所）に表示させるための改善施策は？",
     "options": [
       "SEO（検索エンジン最適化）",
-      "SEM",
-      "MEO",
-      "LPO"
+      "SEM（検索エンジンマーケティング）",
+      "MEO（マップ検索最適化）",
+      "LPO（ランディングページ最適化）"
     ],
-    "answerIndex": 0
+    "answerIndex": 0,
+    "explanation": "コンテンツ品質・サイト構造・被リンクなどを最適化し、検索順位の向上を目指します。"
   },
   {
     "chapter": "第3章：広告・分析編（数字を読み解く）",
     "id": "Q21",
     "text": "広告がユーザーの画面に「表示された回数」を示す指標は？",
     "options": [
-      "リーチ",
-      "クリック",
+      "リーチ（到達人数）",
+      "クリック（押下数）",
       "インプレッション（IMP）",
-      "エンゲージメント"
+      "エンゲージメント（接触反応）"
     ],
-    "answerIndex": 2
+    "answerIndex": 2,
+    "explanation": "「表示された回数」を示すため、同じ人に複数回表示されてもカウントされます。"
   },
   {
     "chapter": "第3章：広告・分析編（数字を読み解く）",
@@ -262,19 +283,21 @@ const QUIZ_DATA = [
       "CPC（クリック単価）",
       "CPA（顧客獲得単価）"
     ],
-    "answerIndex": 0
+    "answerIndex": 0,
+    "explanation": "「Click Through Rate」の略。低い場合は広告クリエイティブの見直しが必要です。"
   },
   {
     "chapter": "第3章：広告・分析編（数字を読み解く）",
     "id": "Q23",
     "text": "1回のコンバージョンを獲得するのにかかった広告費用のことは？",
     "options": [
-      "CPC",
+      "CPC（クリック単価）",
       "CPA（顧客獲得単価）",
-      "CPM",
-      "ROAS"
+      "CPM（インプレッション単価）",
+      "ROAS（広告費用対効果）"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "「Cost Per Acquisition」の略。広告効率の指標で、低いほど良いとされます。"
   },
   {
     "chapter": "第3章：広告・分析編（数字を読み解く）",
@@ -286,7 +309,8 @@ const QUIZ_DATA = [
       "リスティング広告",
       "SNS広告"
     ],
-    "answerIndex": 2
+    "answerIndex": 2,
+    "explanation": "ユーザーの検索意図に直結するため、CV率が高い広告手法です。"
   },
   {
     "chapter": "第3章：広告・分析編（数字を読み解く）",
@@ -298,7 +322,8 @@ const QUIZ_DATA = [
       "ネイティブ広告",
       "リターゲティング広告"
     ],
-    "answerIndex": 3
+    "answerIndex": 3,
+    "explanation": "一度興味を示したユーザーへの再アプローチで、CV率向上を狙います。"
   },
   {
     "chapter": "第3章：広告・分析編（数字を読み解く）",
@@ -310,31 +335,34 @@ const QUIZ_DATA = [
       "回遊率",
       "クリック率"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "高すぎる場合はLPの内容や速度に問題がある可能性。コンテンツ改善のヒントになります。"
   },
   {
     "chapter": "第3章：広告・分析編（数字を読み解く）",
     "id": "Q27",
     "text": "サイト内のページが見られた「延べ回数」を指す指標は？",
     "options": [
-      "UU",
-      "セッション",
+      "UU（ユニークユーザー）",
+      "セッション（訪問単位）",
       "PV（ページビュー）",
-      "リーチ"
+      "リーチ（到達人数）"
     ],
-    "answerIndex": 2
+    "answerIndex": 2,
+    "explanation": "同じユーザーが複数ページを閲覧すれば加算。サイト全体の活発さを示します。"
   },
   {
     "chapter": "第3章：広告・分析編（数字を読み解く）",
     "id": "Q28",
     "text": "投資した広告費に対して、どれだけの「売上」を得られたかを示す指標は？",
     "options": [
-      "ROI",
-      "CPA",
-      "LTV",
+      "ROI（投資利益率）",
+      "CPA（顧客獲得単価）",
+      "LTV（顧客生涯価値）",
       "ROAS（広告費用対効果）"
     ],
-    "answerIndex": 3
+    "answerIndex": 3,
+    "explanation": "「Return On Ad Spend」の略。100%以上で広告投資が回収できている状態です。"
   },
   {
     "chapter": "第3章：広告・分析編（数字を読み解く）",
@@ -346,31 +374,34 @@ const QUIZ_DATA = [
       "A/Bテスト",
       "単体テスト"
     ],
-    "answerIndex": 2
+    "answerIndex": 2,
+    "explanation": "客観的データで意思決定するための基本手法。LPやメール配信などで活用されます。"
   },
   {
     "chapter": "第3章：広告・分析編（数字を読み解く）",
     "id": "Q30",
     "text": "最終目標達成のための「中間目標（チェックポイント）」となる数値は？",
     "options": [
-      "KGI",
+      "KGI（重要目標達成指標）",
       "KPI（重要業績評価指標）",
-      "OKR",
-      "MBO"
+      "OKR（目標と主要成果）",
+      "MBO（目標管理制度）"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "「Key Performance Indicator」の略。日々の業務改善のためのモニタリング指標です。"
   },
   {
     "chapter": "第4章：ビジネススキル・セキュリティ編",
     "id": "Q31",
     "text": "デジタルを活用してビジネスモデルを根本から変革し、競争優位を確立することは？",
     "options": [
-      "デジタイゼーション",
+      "デジタイゼーション（部分的IT化）",
       "DX（デジタルトランスフォーメーション）",
-      "RPA",
-      "クラウド化"
+      "RPA（業務自動化）",
+      "クラウド化（クラウド移行）"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "単なるIT化ではなく、デジタルでビジネスモデルや組織を変革することが本質です。"
   },
   {
     "chapter": "第4章：ビジネススキル・セキュリティ編",
@@ -382,7 +413,8 @@ const QUIZ_DATA = [
       "サブスクリプション",
       "クラウドファンディング"
     ],
-    "answerIndex": 2
+    "answerIndex": 2,
+    "explanation": "継続課金モデル。ユーザーは初期費用を抑えられ、企業は安定収益を得られます。"
   },
   {
     "chapter": "第4章：ビジネススキル・セキュリティ編",
@@ -394,7 +426,8 @@ const QUIZ_DATA = [
       "ERP",
       "CRM"
     ],
-    "answerIndex": 3
+    "answerIndex": 3,
+    "explanation": "「Customer Relationship Management」の略。顧客との長期的関係構築の基盤システムです。"
   },
   {
     "chapter": "第4章：ビジネススキル・セキュリティ編",
@@ -406,7 +439,8 @@ const QUIZ_DATA = [
       "ノーコード開発",
       "スクラッチ開発"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "「変化に強い」開発手法。Webサービスやスタートアップで広く採用されています。"
   },
   {
     "chapter": "第4章：ビジネススキル・セキュリティ編",
@@ -418,7 +452,8 @@ const QUIZ_DATA = [
       "エンドポイント",
       "多要素認証"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "従来の「境界型」防御から、内部も含め全てを検証する考え方への転換です。"
   },
   {
     "chapter": "第4章：ビジネススキル・セキュリティ編",
@@ -430,7 +465,8 @@ const QUIZ_DATA = [
       "アウトソーシング",
       "シャドーIT"
     ],
-    "answerIndex": 3
+    "answerIndex": 3,
+    "explanation": "利便性のため使われがちですが、情報漏えいやセキュリティ事故の温床になります。"
   },
   {
     "chapter": "第4章：ビジネススキル・セキュリティ編",
@@ -442,7 +478,8 @@ const QUIZ_DATA = [
       "ログ",
       "アーカイブ"
     ],
-    "answerIndex": 0
+    "answerIndex": 0,
+    "explanation": "議論の道筋を共有することで、会議の生産性が大きく向上します。"
   },
   {
     "chapter": "第4章：ビジネススキル・セキュリティ編",
@@ -454,7 +491,8 @@ const QUIZ_DATA = [
       "ジョイン",
       "タスク"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "単純な「割り当て」だけでなく、役職や責任を任せる意味でも使われます。"
   },
   {
     "chapter": "第4章：ビジネススキル・セキュリティ編",
@@ -466,7 +504,8 @@ const QUIZ_DATA = [
       "マニュアル",
       "ログ"
     ],
-    "answerIndex": 0
+    "answerIndex": 0,
+    "explanation": "メール・議事録・録音など、後で確認できる形で残しておくことが重要です。"
   },
   {
     "chapter": "第4章：ビジネススキル・セキュリティ編",
@@ -478,7 +517,8 @@ const QUIZ_DATA = [
       "リテラシー",
       "アナリティクス"
     ],
-    "answerIndex": 2
+    "answerIndex": 2,
+    "explanation": "ITリテラシー、メディアリテラシーなど、現代社会で不可欠な能力です。"
   },
   {
     "chapter": "第5章：生成AI・主要ツール編（AI活用を自分ごとに）",
@@ -490,7 +530,8 @@ const QUIZ_DATA = [
       "プログラミングコードを入力するだけで、自動でアプリを完成させる機能",
       "写真や動画をアップロードすると、自動でSNS用のバナー画像を作成する点"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "ハルシネーション抑制が強みで、自分の資料に基づく分析・要約・引用に特化しています。"
   },
   {
     "chapter": "第5章：生成AI・主要ツール編（AI活用を自分ごとに）",
@@ -502,7 +543,8 @@ const QUIZ_DATA = [
       "ソースエディタ",
       "ナレッジグラフ"
     ],
-    "answerIndex": 0
+    "answerIndex": 0,
+    "explanation": "資料の要点・FAQ・学習計画などを自動生成し、内容理解を支援します。"
   },
   {
     "chapter": "第5章：生成AI・主要ツール編（AI活用を自分ごとに）",
@@ -514,19 +556,21 @@ const QUIZ_DATA = [
       "コマンド",
       "ログ"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "質問内容、役割設定、制約条件などを工夫することで回答の質が大きく変わります。"
   },
   {
     "chapter": "第5章：生成AI・主要ツール編（AI活用を自分ごとに）",
     "id": "Q44",
     "text": "AIに指示を出す際、単に「書いて」と言うより、「あなたはプロの編集者です」と役割を与える手法を何と呼ぶか？",
     "options": [
-      "ターゲティング",
-      "フィルタリング",
-      "デバッグ",
+      "ターゲティング（対象絞り込み）",
+      "フィルタリング（条件除外）",
+      "デバッグ（不具合修正）",
       "ロール（役割）付与"
     ],
-    "answerIndex": 3
+    "answerIndex": 3,
+    "explanation": "「あなたは○○の専門家です」と役割を与えることで、回答の精度と専門性が向上します。"
   },
   {
     "chapter": "第5章：生成AI・主要ツール編（AI活用を自分ごとに）",
@@ -538,7 +582,8 @@ const QUIZ_DATA = [
       "フリーズ",
       "シャドーIT"
     ],
-    "answerIndex": 0
+    "answerIndex": 0,
+    "explanation": "「幻覚」が語源。AIが事実と異なる内容を堂々と回答する現象。必ず人間の事実確認が必要です。"
   },
   {
     "chapter": "第5章：生成AI・主要ツール編（AI活用を自分ごとに）",
@@ -550,7 +595,8 @@ const QUIZ_DATA = [
       "非常に高速なレスポンスで、短文の添削や簡単な定型業務をこなすこと",
       "プロレベルの高品質なイラストや人物写真を生成すること"
     ],
-    "answerIndex": 2
+    "answerIndex": 2,
+    "explanation": "軽量・高速モデルとして、即時応答が必要な定型業務向けに最適化されています。"
   },
   {
     "chapter": "第5章：生成AI・主要ツール編（AI活用を自分ごとに）",
@@ -562,19 +608,21 @@ const QUIZ_DATA = [
       "GPTs",
       "DALL-E"
     ],
-    "answerIndex": 2
+    "answerIndex": 2,
+    "explanation": "特定業務専用の指示・知識・ツールを設定し、自社業務に最適化したAIを作成できます。"
   },
   {
     "chapter": "第5章：生成AI・主要ツール編（AI活用を自分ごとに）",
     "id": "Q48",
     "text": "ChatGPTなどの大規模言語モデル（LLM）が、膨大な文章から重要なポイントを抜き出す作業を何と呼ぶか？",
     "options": [
-      "スキャン",
+      "スキャン（読み取り）",
       "要約（サマリー）",
-      "フィルタリング",
-      "アーカイブ"
+      "フィルタリング（条件抽出）",
+      "アーカイブ（保管）"
     ],
-    "answerIndex": 1
+    "answerIndex": 1,
+    "explanation": "長文を短くまとめる能力はLLMの基本機能。会議録や論文の概要把握に活用できます。"
   },
   {
     "chapter": "第5章：生成AI・主要ツール編（AI活用を自分ごとに）",
@@ -586,7 +634,8 @@ const QUIZ_DATA = [
       "AIごとに対応している言語（日本語のみ、英語のみ等）が厳密に分かれているため",
       "パソコンのメーカー（AppleかMicrosoftか）によって使えるAIが異なるため"
     ],
-    "answerIndex": 0
+    "answerIndex": 0,
+    "explanation": "高精度モデルは高コスト、軽量モデルは低コスト。用途に応じた使い分けが重要です。"
   },
   {
     "chapter": "第5章：生成AI・主要ツール編（AI活用を自分ごとに）",
@@ -598,7 +647,8 @@ const QUIZ_DATA = [
       "印刷して、フォントの見た目が綺麗かどうかを確認すること",
       "内容に誤りがないか、人間の目による事実確認と校正を行うこと"
     ],
-    "answerIndex": 3
+    "answerIndex": 3,
+    "explanation": "AIは事実誤認や偏った回答を生成する可能性があり、最終確認は必ず人間が行うべきです。"
   }
 ];
 
@@ -620,15 +670,15 @@ document.addEventListener('DOMContentLoaded', () => {
 function renderQuestion(index) {
     const container = document.getElementById('quiz-container');
     container.innerHTML = '';
-    
+
     if (index >= QUIZ_DATA.length) {
         showResult();
         return;
     }
 
     const q = QUIZ_DATA[index];
-    failCount = 0; // 新しい問題の開始時にリセット
-    
+    failCount = 0;
+
     const card = document.createElement('div');
     card.className = 'quiz-card fade-in';
 
@@ -636,23 +686,22 @@ function renderQuestion(index) {
     header.className = 'quiz-header';
     header.innerHTML = `<span class="chapter-badge">${q.chapter}</span>
                         <h2>${q.id}. ${q.text}</h2>`;
-    
+
     card.appendChild(header);
 
     const optionsList = document.createElement('div');
     optionsList.className = 'options-list';
-    
+
     q.options.forEach((opt, idx) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
-        // 'ア〜エ' を '1〜4' に変換
         btn.innerHTML = `<span class="option-number">${idx + 1}</span> ${opt}`;
         btn.onclick = () => handleAnswer(idx, q.answerIndex, btn);
         optionsList.appendChild(btn);
     });
-    
+
     card.appendChild(optionsList);
-    
+
     const feedback = document.createElement('div');
     feedback.id = 'feedback-area';
     feedback.className = 'feedback';
@@ -663,71 +712,87 @@ function renderQuestion(index) {
 }
 
 function handleAnswer(selectedIndex, correctIndex, btnElement) {
-    const feedback = document.getElementById('feedback-area');
-    
-    // Disable buttons temporarily
     const buttons = document.querySelectorAll('.option-btn');
     buttons.forEach(btn => btn.disabled = true);
-    
+
+    const q = QUIZ_DATA[currentQuestionIndex];
+
     if (selectedIndex === correctIndex) {
-        // 1回目の選択で正解した場合のみカウントアップ
         if (failCount === 0) {
             correctCount++;
-            chapterStats[QUIZ_DATA[currentQuestionIndex].chapter].correct++;
+            chapterStats[q.chapter].correct++;
         }
         showOverlay('circle');
         btnElement.classList.add('correct-answer');
-        feedback.innerHTML = '<span class="correct-text">正解！</span> 次の問題へ進みます...';
-        feedback.classList.remove('incorrect-text');
-        feedback.classList.add('correct-text');
-        
-        setTimeout(() => {
-            currentQuestionIndex++;
-            renderQuestion(currentQuestionIndex);
-        }, 1200);
-        
+        setTimeout(() => showExplanation(true, correctIndex, q.explanation), 800);
+
     } else {
         failCount++;
         btnElement.classList.add('wrong-answer');
-        
+
         if (failCount < 2) {
             showOverlay('cross');
+            const feedback = document.getElementById('feedback-area');
             const remaining = 2 - failCount;
             feedback.innerHTML = `<span class="incorrect-text">不正解！ 残り${remaining}回挑戦できます。</span>`;
-            
+
             setTimeout(() => {
-                buttons.forEach(btn => btn.disabled = false);
+                buttons.forEach(btn => {
+                    if (!btn.classList.contains('wrong-answer')) {
+                        btn.disabled = false;
+                    }
+                });
             }, 1000);
         } else {
             showOverlay('cross');
-            feedback.innerHTML = '<span class="incorrect-text">2回間違えました。正解は <strong>' + (correctIndex + 1) + '</strong> です。次の問題へ進みます...</span>';
-            buttons[correctIndex].classList.add('correct-answer'); // highlight correct
-            
-            setTimeout(() => {
-                currentQuestionIndex++;
-                renderQuestion(currentQuestionIndex);
-            }, 3000);
+            buttons[correctIndex].classList.add('correct-answer');
+            setTimeout(() => showExplanation(false, correctIndex, q.explanation), 800);
         }
     }
+}
+
+function showExplanation(isCorrect, correctIndex, explanation) {
+    const feedback = document.getElementById('feedback-area');
+    const resultLabel = isCorrect
+        ? '<span class="correct-text">正解！</span>'
+        : `<span class="incorrect-text">不正解。正解は ${correctIndex + 1} です。</span>`;
+
+    const explanationHtml = explanation
+        ? `<div class="explanation-box">
+              <span class="explanation-title">解説</span>
+              <p class="explanation-text">${explanation}</p>
+           </div>`
+        : '';
+
+    feedback.innerHTML = `
+        <div class="result-label">${resultLabel}</div>
+        ${explanationHtml}
+        <button class="next-btn" onclick="goToNext()">次の問題へ →</button>
+    `;
+}
+
+function goToNext() {
+    currentQuestionIndex++;
+    renderQuestion(currentQuestionIndex);
 }
 
 function showOverlay(type) {
     const overlay = document.getElementById('overlay');
     const circle = document.getElementById('circle-mark');
     const cross = document.getElementById('cross-mark');
-    
+
     overlay.style.display = 'flex';
     circle.style.display = 'none';
     cross.style.display = 'none';
-    
+
     if (type === 'circle') {
         circle.style.display = 'block';
     } else {
         cross.style.display = 'block';
     }
-    
+
     overlay.classList.add('show-anim');
-    
+
     setTimeout(() => {
         overlay.classList.remove('show-anim');
         overlay.style.display = 'none';
@@ -745,8 +810,7 @@ function showResult() {
     const container = document.getElementById('quiz-container');
     const total = QUIZ_DATA.length;
     const percentage = Math.round((correctCount / total) * 100);
-    
-    // 円グラフのHTML生成
+
     const pieChartHtml = `
         <div style="display: flex; justify-content: center; margin: 1.5rem 0;">
             <div style="
@@ -774,7 +838,7 @@ function showResult() {
             </div>
         </div>
     `;
-    
+
     let chapterHtml = '<div class="chapter-results" style="margin: 2rem 0; text-align: left;">';
     for (const [chapter, stats] of Object.entries(chapterStats)) {
         const chapPercent = Math.round((stats.correct / stats.total) * 100) || 0;
@@ -817,7 +881,6 @@ function showResult() {
     }
     chapterHtml += '</div>';
 
-    // スコアに応じてメッセージを変える
     let message = '';
     if (percentage >= 90) {
         message = '素晴らしい！ITの基礎知識はバッチリです！';
