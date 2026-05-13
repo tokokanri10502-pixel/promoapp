@@ -13,24 +13,29 @@ for (const line of lines) {
         currentQ = {
             chapter: chapterTitle,
             id: line.match(/Q\d+/)[0],
-            text: line.replace(/\*\*Q\d+\.\s?/, '').replace('\*\*', '').trim(),
+            text: line.replace(/\*\*Q\d+\.\s?/, '').replace(/\*\*$/, '').trim(),
             options: [],
-            answerIndex: -1
+            answerIndex: -1,
+            explanation: ''
         };
         questions.push(currentQ);
     } else if (line.match(/^\d+\.\s/)) {
         if (currentQ) {
-            currentQ.options.push(line.replace(/^\d+\.\s/, '')); // Remove "1. " etc
+            currentQ.options.push(line.replace(/^\d+\.\s/, ''));
         }
     } else if (line.startsWith('【正解】')) {
         const correct = line.replace('【正解】', '').trim();
         if (currentQ) {
             currentQ.answerIndex = parseInt(correct, 10) - 1;
         }
+    } else if (line.startsWith('**【解説】**')) {
+        if (currentQ) {
+            currentQ.explanation = line.replace('**【解説】**', '').trim();
+        }
     }
 }
 
-const scriptContent = `// DMS 問題集データ (自動生成)
+const scriptContent = `// DMS 問題集データ (自動生成) - 解説表示UI付き
 const QUIZ_DATA = ${JSON.stringify(questions, null, 2)};
 
 let currentQuestionIndex = 0;
@@ -51,15 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
 function renderQuestion(index) {
     const container = document.getElementById('quiz-container');
     container.innerHTML = '';
-    
+
     if (index >= QUIZ_DATA.length) {
         showResult();
         return;
     }
 
     const q = QUIZ_DATA[index];
-    failCount = 0; // 新しい問題の開始時にリセット
-    
+    failCount = 0;
+
     const card = document.createElement('div');
     card.className = 'quiz-card fade-in';
 
@@ -67,23 +72,22 @@ function renderQuestion(index) {
     header.className = 'quiz-header';
     header.innerHTML = \`<span class="chapter-badge">\${q.chapter}</span>
                         <h2>\${q.id}. \${q.text}</h2>\`;
-    
+
     card.appendChild(header);
 
     const optionsList = document.createElement('div');
     optionsList.className = 'options-list';
-    
+
     q.options.forEach((opt, idx) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
-        // 'ア〜エ' を '1〜4' に変換
         btn.innerHTML = \`<span class="option-number">\${idx + 1}</span> \${opt}\`;
         btn.onclick = () => handleAnswer(idx, q.answerIndex, btn);
         optionsList.appendChild(btn);
     });
-    
+
     card.appendChild(optionsList);
-    
+
     const feedback = document.createElement('div');
     feedback.id = 'feedback-area';
     feedback.className = 'feedback';
@@ -94,71 +98,87 @@ function renderQuestion(index) {
 }
 
 function handleAnswer(selectedIndex, correctIndex, btnElement) {
-    const feedback = document.getElementById('feedback-area');
-    
-    // Disable buttons temporarily
     const buttons = document.querySelectorAll('.option-btn');
     buttons.forEach(btn => btn.disabled = true);
-    
+
+    const q = QUIZ_DATA[currentQuestionIndex];
+
     if (selectedIndex === correctIndex) {
-        // 1回目の選択で正解した場合のみカウントアップ
         if (failCount === 0) {
             correctCount++;
-            chapterStats[QUIZ_DATA[currentQuestionIndex].chapter].correct++;
+            chapterStats[q.chapter].correct++;
         }
         showOverlay('circle');
         btnElement.classList.add('correct-answer');
-        feedback.innerHTML = '<span class="correct-text">正解！</span> 次の問題へ進みます...';
-        feedback.classList.remove('incorrect-text');
-        feedback.classList.add('correct-text');
-        
-        setTimeout(() => {
-            currentQuestionIndex++;
-            renderQuestion(currentQuestionIndex);
-        }, 1200);
-        
+        setTimeout(() => showExplanation(true, correctIndex, q.explanation), 800);
+
     } else {
         failCount++;
         btnElement.classList.add('wrong-answer');
-        
+
         if (failCount < 2) {
             showOverlay('cross');
+            const feedback = document.getElementById('feedback-area');
             const remaining = 2 - failCount;
             feedback.innerHTML = \`<span class="incorrect-text">不正解！ 残り\${remaining}回挑戦できます。</span>\`;
-            
+
             setTimeout(() => {
-                buttons.forEach(btn => btn.disabled = false);
+                buttons.forEach(btn => {
+                    if (!btn.classList.contains('wrong-answer')) {
+                        btn.disabled = false;
+                    }
+                });
             }, 1000);
         } else {
             showOverlay('cross');
-            feedback.innerHTML = '<span class="incorrect-text">2回間違えました。正解は <strong>' + (correctIndex + 1) + '</strong> です。次の問題へ進みます...</span>';
-            buttons[correctIndex].classList.add('correct-answer'); // highlight correct
-            
-            setTimeout(() => {
-                currentQuestionIndex++;
-                renderQuestion(currentQuestionIndex);
-            }, 3000);
+            buttons[correctIndex].classList.add('correct-answer');
+            setTimeout(() => showExplanation(false, correctIndex, q.explanation), 800);
         }
     }
+}
+
+function showExplanation(isCorrect, correctIndex, explanation) {
+    const feedback = document.getElementById('feedback-area');
+    const resultLabel = isCorrect
+        ? '<span class="correct-text">正解！</span>'
+        : \`<span class="incorrect-text">不正解。正解は \${correctIndex + 1} です。</span>\`;
+
+    const explanationHtml = explanation
+        ? \`<div class="explanation-box">
+              <span class="explanation-title">解説</span>
+              <p class="explanation-text">\${explanation}</p>
+           </div>\`
+        : '';
+
+    feedback.innerHTML = \`
+        <div class="result-label">\${resultLabel}</div>
+        \${explanationHtml}
+        <button class="next-btn" onclick="goToNext()">次の問題へ →</button>
+    \`;
+}
+
+function goToNext() {
+    currentQuestionIndex++;
+    renderQuestion(currentQuestionIndex);
 }
 
 function showOverlay(type) {
     const overlay = document.getElementById('overlay');
     const circle = document.getElementById('circle-mark');
     const cross = document.getElementById('cross-mark');
-    
+
     overlay.style.display = 'flex';
     circle.style.display = 'none';
     cross.style.display = 'none';
-    
+
     if (type === 'circle') {
         circle.style.display = 'block';
     } else {
         cross.style.display = 'block';
     }
-    
+
     overlay.classList.add('show-anim');
-    
+
     setTimeout(() => {
         overlay.classList.remove('show-anim');
         overlay.style.display = 'none';
@@ -176,8 +196,7 @@ function showResult() {
     const container = document.getElementById('quiz-container');
     const total = QUIZ_DATA.length;
     const percentage = Math.round((correctCount / total) * 100);
-    
-    // 円グラフのHTML生成
+
     const pieChartHtml = \`
         <div style="display: flex; justify-content: center; margin: 1.5rem 0;">
             <div style="
@@ -205,7 +224,7 @@ function showResult() {
             </div>
         </div>
     \`;
-    
+
     let chapterHtml = '<div class="chapter-results" style="margin: 2rem 0; text-align: left;">';
     for (const [chapter, stats] of Object.entries(chapterStats)) {
         const chapPercent = Math.round((stats.correct / stats.total) * 100) || 0;
@@ -248,7 +267,6 @@ function showResult() {
     }
     chapterHtml += '</div>';
 
-    // スコアに応じてメッセージを変える
     let message = '';
     if (percentage >= 90) {
         message = '素晴らしい！ITの基礎知識はバッチリです！';
@@ -279,3 +297,5 @@ function showResult() {
 
 fs.writeFileSync('script.js', scriptContent, 'utf8');
 console.log('Successfully generated script.js');
+console.log('Total questions: ' + questions.length);
+console.log('Questions with explanation: ' + questions.filter(q => q.explanation).length);
