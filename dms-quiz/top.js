@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('user-department').focus();
         }
     });
-    document.getElementById('user-department').addEventListener('keydown', e => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
+    // 部署を選択したら自動的にv1ボタンへフォーカス
+    document.getElementById('user-department').addEventListener('change', () => {
+        if (document.getElementById('user-department').value) {
             document.querySelector('.version-btn-v1').focus();
         }
     });
