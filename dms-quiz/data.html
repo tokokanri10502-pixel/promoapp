@@ -2,8 +2,19 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="refresh" content="0; url=https://docs.google.com/spreadsheets/d/1GKoxtXr55qVbZT73G5ItfNNI0xVrStIBtNdCzx04gO0/edit?gid=1329088276">
+<script>
+// 即時実行：JSが動けば最速で飛ばす
+(function(){
+  var target = 'https://docs.google.com/spreadsheets/d/1GKoxtXr55qVbZT73G5ItfNNI0xVrStIBtNdCzx04gO0/edit?gid=1329088276';
+  try { window.location.replace(target); }
+  catch(e) { window.location.href = target; }
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="refresh" content="0; url=https://docs.google.com/spreadsheets/d/1GKoxtXr55qVbZT73G5ItfNNI0xVrStIBtNdCzx04gO0/edit?gid=1329088276#gid=1329088276">
 <title>DMS Quiz 分析結果へ移動中…</title>
 <style>
 body {
@@ -27,8 +38,17 @@ body {
 }
 h1 { font-size: 1.2rem; margin: 0 0 0.5rem; }
 p { color: #666; line-height: 1.6; margin: 0.5rem 0; }
-a { color: #2563eb; text-decoration: none; font-weight: bold; }
-a:hover { text-decoration: underline; }
+a {
+    display: inline-block;
+    background: #2563eb;
+    color: white !important;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.7rem 1.5rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+}
+a:hover { background: #1d4ed8; }
 .spinner {
     width: 32px; height: 32px; margin: 1rem auto;
     border: 3px solid #e0ddd6; border-top-color: #2563eb;
@@ -43,13 +63,8 @@ a:hover { text-decoration: underline; }
     <h1>DMS Quiz 分析結果</h1>
     <div class="spinner"></div>
     <p>スプレッドシートへ移動中です…</p>
-    <p>自動でジャンプしない場合は<br><a href="https://docs.google.com/spreadsheets/d/1GKoxtXr55qVbZT73G5ItfNNI0xVrStIBtNdCzx04gO0/edit?gid=1329088276#gid=1329088276">こちらをクリック</a></p>
+    <p>3秒待っても画面が変わらない場合は<br>
+    <a href="https://docs.google.com/spreadsheets/d/1GKoxtXr55qVbZT73G5ItfNNI0xVrStIBtNdCzx04gO0/edit?gid=1329088276">分析結果を開く</a></p>
 </div>
-<script>
-// meta refresh のバックアップとして JS でも転送
-setTimeout(() => {
-    window.location.replace('https://docs.google.com/spreadsheets/d/1GKoxtXr55qVbZT73G5ItfNNI0xVrStIBtNdCzx04gO0/edit?gid=1329088276#gid=1329088276');
-}, 100);
-</script>
 </body>
 </html>
